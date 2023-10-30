@@ -1,6 +1,6 @@
 <?php
 require_once("connexion.php");
-require_once("utilisateur.class.php");
+require_once("conducteur.class.php");
 class UitlisateurDAO
 {
     private $bd;
@@ -9,47 +9,46 @@ class UitlisateurDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT idpers, nom, prenom, loginn, mdp FROM UTILISATEURS ';
+        $this->select = 'SELECT num_permis, date_permis, nom, prenom, mdp FROM CONDUCTEUR ';
     }
 
-    function insert(Utilisateur $util): void
+    function insert(Conducteur $conduct): void
     {
-        $this->bd->execSQL("INSERT INTO UTILISATEURS (idpers, nom, prenom, loginn, mdp)
-                                        VALUES (:id, :nom, :prenom, :loginn, :mdp)"
+        $this->bd->execSQL("INSERT INTO CONDUCTEUR (num_permis,date_permis, nom, prenom, mdp)
+                                        VALUES (:num_permis, :date_permis, :nom, :prenom, :mdp)"
             ,
             [
-                ':id' => $util->getIdpers(),
-                ':nom' => $util->getNom()
-                ,
-                ':prenom' => $util->getPrenom(),
-                ':loginn' => $util->getLog(),
-                ':mdp' => $util->getMdp()
+                ':num_permis' => $conduct->getNum(),
+                ':date_permis' => $conduct->getDatePermis(),
+                ':nom' => $conduct->getNom(),
+                ':prenom' => $conduct->getPrenom(),
+                ':mdp' => $conduct->getMdp()
             ]
         );
     }
 
-    function delete(string $id): void
+    function delete(string $num_permis): void
     {
         $this->bd->execSQL(
-            "DELETE FROM UTILISATEURS WHERE idpers = :id"
+            "DELETE FROM CONDUCTEUR WHERE num_permis = :num"
             ,
-            [':id' => $id]
+            [':num' => $num_permis]
         );
     }
 
     private function loadQuery(array $result): array
     {
-        $utils = [];
+        $conducts = [];
         foreach ($result as $row) {
-            $util = new Utilisateur();
-            $util->setIdpers($row['idpers']);
-            $util->setNom($row['nom']);
-            $util->setPrenom($row['prenom']);
-            $util->setLog($row['loginn']);
-            $util->setMdp($row['mdp']);
-            $utils[] = $util;
+            $conduct = new Conducteur();
+            $conduct->setNum($row['num_permis']);
+            $conduct->setDatePermis(new date($row['date_permis']));
+            $conduct->setNom($row['nom']);
+            $conduct->setPrenom($row['prenom']);
+            $conduct->setMdp($row['mot_de_passe']);
+            $conducts[] = $conduct;
         }
-        return $utils;
+        return $conducts;
     }
 
     function getAll(): array
@@ -57,31 +56,21 @@ class UitlisateurDAO
         return ($this->loadQuery($this->bd->execSQL($this->select)));
     }
 
-    function getByNum(string $id): Utilisateur
+    function getByNum(string $num): Conducteur
     {
-        $unUtil = new Utilisateur();
-        $lesUtils = $this->loadQuery($this->bd->execSQL($this->select . " WHERE idpers=:id", [':id' => $id]));
-        if (count($lesUtils) > 0) {
-            $unUtil = $lesUtils[0];
+        $unConduct = new Conducteur();
+        $lesConducts = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_permis=:num", [':num' => $num]));
+        if (count($lesConducts) > 0) {
+            $unConduct = $lesConducts[0];
         }
-        return $unUtil;
+        return $unConduct;
     }
 
-    function getByLogin(string $id): Utilisateur
+    function existe(string $num_permis): bool
     {
-        $unUtil = new Utilisateur();
-        $lesUtils = $this->loadQuery($this->bd->execSQL($this->select . " WHERE loginn=:id", [':id' => $id]));
-        if (count($lesUtils) > 0) {
-            $unUtil = $lesUtils[0];
-        }
-        return $unUtil;
-    }
-
-    function existe(string $idpers): bool
-    {
-        $req = "SELECT *  FROM  UTILISATEURS
-					  WHERE idpers = :id";
-        $res = ($this->loadQuery($this->bd->execSQL($req, [':id' => $idpers])));
+        $req = "SELECT *  FROM  CONDUCTEUR
+					  WHERE num_permis = :num";
+        $res = ($this->loadQuery($this->bd->execSQL($req, [':num' => $num_permis])));
         return ($res != []);
     }
 }
