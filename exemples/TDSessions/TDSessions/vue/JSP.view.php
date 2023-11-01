@@ -10,6 +10,7 @@
         </section>
         <div>
             <h1>Here goes nothing</h1>
+            <?php afficheUtilisateurs($content) ?>
         </div>
     </body>
 </html>

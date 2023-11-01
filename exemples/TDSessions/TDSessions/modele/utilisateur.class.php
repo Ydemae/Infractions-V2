@@ -25,5 +25,9 @@
 		function setLog		(string $login)		{ $this->login = $login; 			}
 		function getMdp		() : string			{ return $this->mdp; 		}
 		function setMdp		(string $mdp)		{ $this->mdp = $mdp; 			}
+
+		function json_serialize(){
+			return get_object_vars($this);
+		}
 	}
 ?>

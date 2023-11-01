@@ -16,20 +16,26 @@
 			$utils = [];
 			foreach($result as $row)
 			{
+				$arr = json_decode(json_encode($row), TRUE);
 				$util = new Utilisateur();
-				$util->setIdpers($row['idpers']);
-				$util->setNom($row['nom']);
-				$util->setPrenom($row['prenom']);
-				$util->setLog($row['loginn']);
-				$util->setMdp($row['mdp']);
-				$utils[] = $util; 
+				$util->setIdpers($arr['idpers']);
+				$util->setNom($arr['nom']);
+				$util->setPrenom($arr['prenom']);
+				$util->setLog($arr['loginn']);
+				$util->setMdp($arr['mdp']);
+				$utils[] = $util;
 			}
 			return $utils;
 		}
-		function listeUtilisateurs() : stdClass{
-			while ($this->bd->execSQL($this->select)){
-				
-			}
+		function listeUtilisateurs() : array{
+			return $this->loadQuery($this->bd->execSQL($this->select));
+		}
+
+		function insert (Utilisateur $util) : void {
+            $this->bd->execSQL("INSERT INTO UTILISATEURS (idpers, nom, prenom, loginn, mdp)
+                                        VALUES (:id, :nom, :prenom, :loginn, :mdp)"
+								,[':id'=>$util->getIdpers(), ':nom'=>$util->getNom()
+									,':prenom'=>$util->getPrenom() , ':loginn' =>$util->getLog(), ':mdp' => $util->getMdp() ] );
 		}
     }
 ?>

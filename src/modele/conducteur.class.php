@@ -7,7 +7,7 @@ class Conducteur
 	private $prenom;
 	private $mdp;
 
-	function __construct(string $num_permis = '', $date_permis = new date(), string $nom = '', string $prenom = '', string $mdp = '')
+	function __construct(string $num_permis = '', string $date_permis = '', string $nom = '', string $prenom = '', string $mdp = '')
 	{
 		$this->num_permis = $num_permis;
 		$this->date_permis = $date_permis;

@@ -1,7 +1,7 @@
 <?php
 require_once("connexion.php");
 require_once("conducteur.class.php");
-class UitlisateurDAO
+class ConducteurDAO
 {
     private $bd;
     private $select;
@@ -40,9 +40,10 @@ class UitlisateurDAO
     {
         $conducts = [];
         foreach ($result as $row) {
+            $row = json_decode(json_encode($row), TRUE);
             $conduct = new Conducteur();
             $conduct->setNum($row['num_permis']);
-            $conduct->setDatePermis(new date($row['date_permis']));
+            $conduct->setDatePermis($row['date_permis']);
             $conduct->setNom($row['nom']);
             $conduct->setPrenom($row['prenom']);
             $conduct->setMdp($row['mot_de_passe']);
