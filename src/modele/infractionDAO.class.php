@@ -9,16 +9,15 @@ class InfractionDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT num_inf, date_inf, immat, num_permis FROM INFRACTION ';
+        $this->select = 'SELECT id_inf, date_inf, num_immat, num_permis FROM infraction ';
     }
 
     function insert(Infraction $inf): void
     {
-        $this->bd->execSQL("INSERT INTO INFRACTION (num_inf, date_inf, immat, num_permis)
-                                        VALUES (:num_inf, :date_inf, :immat, :num_permis)"
+        $this->bd->execSQL("INSERT INTO infraction (date_inf, num_immat, num_permis)
+                                        VALUES (:date_inf, :immat, :num_permis)"
             ,
             [
-                ':num_inf' => $inf->getNumInf(),
                 ':date_inf' => $inf->getDateInf(),
                 ':immat' => $inf->getImmat(),
                 ':num_permis' => $inf->getNumPermis()
@@ -29,10 +28,18 @@ class InfractionDAO
     function delete(string $num): void
     {
         $this->bd->execSQL(
-            "DELETE FROM INFRACTION WHERE num_inf = :inf"
+            "DELETE FROM infraction WHERE id_inf = :inf"
             ,
             [':inf' => $num]
         );
+    }
+
+    function GetAutoIncrement(): int
+    {
+        $temp = $this->bd->execSQL("SELECT `AUTO_INCREMENT`
+        FROM  INFORMATION_SCHEMA.TABLES
+        Where   TABLE_NAME   = 'infraction';")[1];
+        return (int) json_decode(json_encode($temp), TRUE)["AUTO_INCREMENT"];
     }
 
     private function loadQuery(array $result): array
@@ -41,9 +48,9 @@ class InfractionDAO
         foreach ($result as $row) {
             $row = json_decode(json_encode($row), TRUE);
             $inf = new Infraction();
-            $inf->setNumInf($row['num_inf']);
+            $inf->setNumInf($row['id_inf']);
             $inf->setDateInf($row['date_inf']);
-            $inf->setImmat($row['immat']);
+            $inf->setImmat($row['num_immat']);
             $inf->setNumPermis($row['num_permis']);
             $Infs[] = $inf;
         }
@@ -58,7 +65,7 @@ class InfractionDAO
     function getByNumInf(string $num_inf): Infraction
     {
         $uneInf = new Infraction();
-        $lesInfractions = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_inf=:num_inf", [':num_inf' => $num_inf]));
+        $lesInfractions = $this->loadQuery($this->bd->execSQL($this->select . " WHERE id_inf=:num_inf", [':num_inf' => $num_inf]));
         if (count($lesInfractions) > 0) {
             $uneInf = $lesInfractions[0];
         }
@@ -67,8 +74,8 @@ class InfractionDAO
 
     function existe(string $num_inf): bool
     {
-        $req = "SELECT *  FROM  INFRACTION
-					  WHERE num_inf = :num_inf";
+        $req = "SELECT *  FROM  infraction
+					  WHERE id_inf = :num_inf";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':num_inf' => $num_inf])));
         return ($res != []);
     }

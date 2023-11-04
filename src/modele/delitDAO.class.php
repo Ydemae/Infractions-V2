@@ -9,12 +9,12 @@ class DelitDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT num_delit, nature, tarif FROM DELIT ';
+        $this->select = 'SELECT id_delit, nature, tarif FROM delit ';
     }
 
     function insert(Delit $del): void
     {
-        $this->bd->execSQL("INSERT INTO DELIT (num_delit, nature, tarif)
+        $this->bd->execSQL("INSERT INTO DELIT (id_delit, nature, tarif)
                                         VALUES (:num, :nat, :tarif)"
             ,
             [
@@ -28,7 +28,7 @@ class DelitDAO
     function delete(string $num_delit): void
     {
         $this->bd->execSQL(
-            "DELETE FROM DELIT WHERE num_delit = :num"
+            "DELETE FROM delit WHERE id_delit = :num"
             ,
             [':num' => $num_delit]
         );
@@ -40,7 +40,7 @@ class DelitDAO
         foreach ($result as $row) {
             $row = json_decode(json_encode($row), TRUE);
             $Del = new Delit();
-            $Del->setNumDelit($row['num_delit']);
+            $Del->setNumDelit($row['id_delit']);
             $Del->setNature($row['nature']);
             $Del->setTarif($row['tarif']);
             $Dels[] = $Del;
@@ -56,7 +56,7 @@ class DelitDAO
     function getByImmat(string $num): Delit
     {
         $unDel = new Delit();
-        $lesDelits = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_delit=:num", [':num' => $num]));
+        $lesDelits = $this->loadQuery($this->bd->execSQL($this->select . " WHERE id_delit=:num", [':num' => $num]));
         if (count($lesDelits) > 0) {
             $unDel = $lesDelits[0];
         }
@@ -66,7 +66,7 @@ class DelitDAO
     function existe(string $num): bool
     {
         $req = "SELECT *  FROM  DELIT
-					  WHERE num_delit = :num";
+					  WHERE id_delit = :num";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':num' => $num])));
         return ($res != []);
     }

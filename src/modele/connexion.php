@@ -8,10 +8,10 @@ class Connexion
     {
 
         $db_config['SGBD'] = 'mysql';
-        $db_config['HOST'] = 'devbdd.iutmetz.univ-lorraine.fr';
-        $db_config['DB_NAME'] = 'db_name';
-        $db_config['USER'] = 'user';
-        $db_config['PASSWORD'] = 'password';
+        $db_config['HOST'] = 'localhost'; //devbdd.iutmetz.univ-lorraine.fr pour l'iut
+        $db_config['DB_NAME'] = 'testinf';
+        $db_config['USER'] = 'root';
+        $db_config['PASSWORD'] = 'root';
 
         try {
             $this->db = new PDO(

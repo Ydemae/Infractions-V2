@@ -20,7 +20,7 @@ class Conducteur
 	{
 		return $this->num_permis;
 	}
-	function setNum(int $num)
+	function setNum(string $num)
 	{
 		$this->num_permis = $num;
 	}

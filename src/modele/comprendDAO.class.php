@@ -9,12 +9,12 @@ class ComprendDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT num_inf, num_delit FROM COMPREND ';
+        $this->select = 'SELECT id_inf, id_delit FROM comprend ';
     }
 
     function insert(Comprend $comp): void
     {
-        $this->bd->execSQL("INSERT INTO COMPREND (num_inf, num_delit)
+        $this->bd->execSQL("INSERT INTO comprend (id_inf, id_delit)
                                         VALUES (:numI, :numD)"
             ,
             [
@@ -27,7 +27,7 @@ class ComprendDAO
     function delete(string $num_inf, string $num_delit): void
     {
         $this->bd->execSQL(
-            "DELETE FROM DELIT WHERE num_delit = :numD AND num_inf = :numI"
+            "DELETE FROM DELIT WHERE id_delit = :numD AND id_inf = :numI"
             ,
             [':numD' => $num_delit, ':numI' => $num_inf]
         );
@@ -39,8 +39,8 @@ class ComprendDAO
         foreach ($result as $row) {
             $row = json_decode(json_encode($row), TRUE);
             $Comp = new Comprend();
-            $Comp->setNumInf($row['num_inf']);
-            $Comp->setNumDelit($row['num_delit']);
+            $Comp->setNumInf($row['id_inf']);
+            $Comp->setNumDelit($row['id_delit']);
             $Comps[] = $Comp;
         }
         return $Comps;
@@ -53,7 +53,7 @@ class ComprendDAO
 
     function getByNumInf(string $num): array
     {
-        $lesComps = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_inf=:num", [':num' => $num]));
+        $lesComps = $this->loadQuery($this->bd->execSQL($this->select . " WHERE id_inf=:num", [':num' => $num]));
         return $lesComps;
     }
 
@@ -64,8 +64,8 @@ class ComprendDAO
 
     function existe(string $numD, string $numI): bool
     {
-        $req = "SELECT *  FROM  COMPREND
-					  WHERE num_delit = :numD AND num_inf = :numI";
+        $req = "SELECT *  FROM  comprend
+					  WHERE id_delit = :numD AND id_inf = :numI";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':numD' => $numD, 'numI' => $numI])));
         return ($res != []);
     }

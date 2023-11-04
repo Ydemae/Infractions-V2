@@ -9,12 +9,12 @@ class ConducteurDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT num_permis, date_permis, nom, prenom, mdp FROM CONDUCTEUR ';
+        $this->select = 'SELECT num_permis, date_permis, nom, prenom, mot_de_passe FROM conducteur ';
     }
 
     function insert(Conducteur $conduct): void
     {
-        $this->bd->execSQL("INSERT INTO CONDUCTEUR (num_permis,date_permis, nom, prenom, mdp)
+        $this->bd->execSQL("INSERT INTO conducteur (num_permis,date_permis, nom, prenom, mot_de_passe)
                                         VALUES (:num_permis, :date_permis, :nom, :prenom, :mdp)"
             ,
             [
@@ -30,7 +30,7 @@ class ConducteurDAO
     function delete(string $num_permis): void
     {
         $this->bd->execSQL(
-            "DELETE FROM CONDUCTEUR WHERE num_permis = :num"
+            "DELETE FROM conducteur WHERE num_permis = :num"
             ,
             [':num' => $num_permis]
         );
@@ -69,7 +69,7 @@ class ConducteurDAO
 
     function existe(string $num_permis): bool
     {
-        $req = "SELECT *  FROM  CONDUCTEUR
+        $req = "SELECT *  FROM  conducteur
 					  WHERE num_permis = :num";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':num' => $num_permis])));
         return ($res != []);

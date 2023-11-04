@@ -9,12 +9,12 @@ class VehiculeDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT immat, date_immat, modele, marque, proprietaire FROM VEHICULE ';
+        $this->select = 'SELECT num_immat, date_immat, modele, marque, num_permis FROM vehicule ';
     }
 
     function insert(Vehicule $vehic): void
     {
-        $this->bd->execSQL("INSERT INTO VEHICULE (immat, date_immat, modele, marque, proprietaire)
+        $this->bd->execSQL("INSERT INTO vehicule (num_immat, date_immat, modele, marque, num_permis)
                                         VALUES (:immat, :date_immat, :modele, :marque, :proprio)"
             ,
             [
@@ -30,7 +30,7 @@ class VehiculeDAO
     function delete(string $immat): void
     {
         $this->bd->execSQL(
-            "DELETE FROM VEHICULE WHERE immat = :immat"
+            "DELETE FROM vehicule WHERE num_immat = :immat"
             ,
             [':immat' => $immat]
         );
@@ -42,11 +42,11 @@ class VehiculeDAO
         foreach ($result as $row) {
             $row = json_decode(json_encode($row), TRUE);
             $vehic = new vehicule();
-            $vehic->setImmat($row['immat']);
+            $vehic->setImmat($row['num_immat']);
             $vehic->setDateImmat($row['date_immat']);
             $vehic->setModele($row['modele']);
             $vehic->setMarque($row['marque']);
-            $vehic->setProprio($row['proprietaire']);
+            $vehic->setProprio($row['num_permis']);
             $Vehics[] = $vehic;
         }
         return $Vehics;
@@ -60,7 +60,7 @@ class VehiculeDAO
     function getByImmat(string $immat): vehicule
     {
         $unVehic = new Vehicule();
-        $lesVehicules = $this->loadQuery($this->bd->execSQL($this->select . " WHERE immat=:immat", [':immat' => $immat]));
+        $lesVehicules = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_immat=:immat", [':immat' => $immat]));
         if (count($lesVehicules) > 0) {
             $unVehic = $lesVehicules[0];
         }
@@ -69,8 +69,8 @@ class VehiculeDAO
 
     function existe(string $immat): bool
     {
-        $req = "SELECT *  FROM  VEHICULE
-					  WHERE immat = :immat";
+        $req = "SELECT *  FROM  vehicule
+					  WHERE num_immat = :immat";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':immat' => $immat])));
         return ($res != []);
     }

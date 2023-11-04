@@ -46,5 +46,10 @@ class Infraction
     {
         $this->num_permis = $num_permis;
     }
+
+    function json_serialize()
+    {
+        return get_object_vars($this);
+    }
 }
 ?>

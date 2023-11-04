@@ -23,7 +23,7 @@ class Comprend
     {
         return $this->num_delit;
     }
-    function setNumDelit(int $num)
+    function setNumDelit(string $num)
     {
         $this->num_delit = $num;
     }
