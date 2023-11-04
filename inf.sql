@@ -44,6 +44,9 @@ CREATE TABLE `comprend` (
 
 INSERT INTO `comprend` (`id_inf`, `id_delit`) VALUES
 ('1', 1),
+('1', 8),
+('10', 1),
+('10', 5),
 ('11', 3),
 ('11', 5),
 ('11', 8),
@@ -51,6 +54,7 @@ INSERT INTO `comprend` (`id_inf`, `id_delit`) VALUES
 ('11', 10),
 ('12', 3),
 ('13', 2),
+('13', 7),
 ('2', 1),
 ('2', 2),
 ('3', 3),
@@ -72,8 +76,6 @@ INSERT INTO `comprend` (`id_inf`, `id_delit`) VALUES
 ('8', 2),
 ('8', 6),
 ('8', 10),
-('85', 1),
-('85', 5),
 ('9', 3),
 ('9', 6),
 ('9', 9);
@@ -124,11 +126,11 @@ CREATE TABLE `delit` (
 INSERT INTO `delit` (`id_delit`, `nature`, `tarif`) VALUES
 (1, 'Excès de vitesse', '220.00'),
 (2, 'Feu rouge grillé', '270.00'),
-(3, 'Conduite en état d\'ivresse', '380.00'),
+(3, "Conduite en état d\'ivresse", '380.00'),
 (4, 'Delit de fuite', '400.00'),
-(5, 'Refus d\'obtempérer', '450.00'),
+(5, "Refus d\'obtempérer", '450.00'),
 (6, 'Conduite après le retrait du permis', '500.00'),
-(7, 'Téléphone au volant ou utilisation d\'app', '10.00'),
+(7, "Téléphone au volant ou utilisation d\'app", '10.00'),
 (8, 'Défaut du contrôle technique', '100.00'),
 (9, 'Surnombre de passagers', '250.00'),
 (10, 'refus de priorité', '280.00');
@@ -217,13 +219,16 @@ ALTER TABLE `delit`
 -- Index pour la table `infraction`
 --
 ALTER TABLE `infraction`
-  ADD PRIMARY KEY (`id_inf`);
+  ADD PRIMARY KEY (`id_inf`),
+  ADD FOREIGN KEY (`num_permis`) REFERENCES conducteur(`num_permis`),
+  ADD FOREIGN KEY (`num_immat`) REFERENCES vehicule(`num_immat`);
 
 --
 -- Index pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  ADD PRIMARY KEY (`num_immat`);
+  ADD PRIMARY KEY (`num_immat`),
+  ADD FOREIGN KEY (`num_permis`) REFERENCES conducteur(`num_permis`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
