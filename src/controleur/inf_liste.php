@@ -12,7 +12,9 @@ $allInfs = $InfDAO->getAll();
 
 
 for($i = 0; $i < count($allInfs); $i ++){
-    $affi .= '<tr><td><a href=""><img src="../../vue/css/visu.png" alt=""></a></td><td>' . $allInfs[$i]->getNumInf() . "</td><td>" . $allInfs[$i]->getDateInf() . "</td><td>" . $allInfs[$i]->getImmat() . "</td><td>";
+    $ExplodedDate = explode( '-', $allInfs[$i]->getDateInf());
+    $newDate = $ExplodedDate[2] . '/' . $ExplodedDate[1] . '/' . $ExplodedDate[0];
+    $affi .= '<tr><td><a href=""><img src="../../vue/css/visu.png" alt=""></a></td><td>' . $allInfs[$i]->getNumInf() . "</td><td>" . $newDate . "</td><td>" . $allInfs[$i]->getImmat() . "</td><td>";
     if ($allInfs[$i]->getNumPermis() != ''){
         $Cond = $ConductDAO->getByNum($allInfs[$i]->getNumPermis());
         $affi .= $allInfs[$i]->getNumPermis() . ' ' . $Cond->getNom() . ' ' . $Cond->getPrenom() . '</td>';
