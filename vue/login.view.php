@@ -14,7 +14,7 @@
         </section>
     </header>
 
-    <h1>Bonjour</h1>
+    <h1>Bonjour, veuillez vous authentifier</h1>
     <br>
 
     <form action="../login.php" method="POST">
