@@ -63,6 +63,20 @@ class InfractionDAO
         return ($this->loadQuery($this->bd->execSQL($this->select)));
     }
 
+    function getTotal(string $num) : float{
+        require_once "../modele/comprendDAO.class.php";
+        require_once "../modele/delitDAO.class.php";
+        $comprendDAO = new ComprendDAO();
+        $delitDAO = new DelitDAO();
+        $dels = $comprendDAO->getByNumInf($num);
+        $somme = 0;
+        foreach($dels as $del){
+            $num_del = $del->getNumDelit();
+            $somme += floatval($delitDAO->getbyId($num_del)->getTarif());
+        }
+        return $somme;
+    }
+
     function getByNumInf(string $num_inf): Infraction
     {
         $uneInf = new Infraction();

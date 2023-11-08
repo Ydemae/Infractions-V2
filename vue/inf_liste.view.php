@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Liste des infractions</title>
-    <link type="text/css" rel="stylesheet" href="./css/inf_liste.css">
+    <link type="text/css" rel="stylesheet" href="../../vue/css/inf_liste.css">
 </head>
 
 <body>
@@ -23,6 +23,7 @@
             </tr>
         </thead>
         <tbody>
+            <?php echo $affi; ?>
         </tbody>
     </table>
     <div class="divaction">

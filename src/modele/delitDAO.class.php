@@ -53,7 +53,7 @@ class DelitDAO
         return ($this->loadQuery($this->bd->execSQL($this->select)));
     }
 
-    function getByImmat(string $num): Delit
+    function getById(string $num): Delit
     {
         $unDel = new Delit();
         $lesDelits = $this->loadQuery($this->bd->execSQL($this->select . " WHERE id_delit=:num", [':num' => $num]));
