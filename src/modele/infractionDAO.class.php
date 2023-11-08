@@ -38,8 +38,9 @@ class InfractionDAO
     {
         $temp = $this->bd->execSQL("SELECT `AUTO_INCREMENT`
         FROM  INFORMATION_SCHEMA.TABLES
-        Where   TABLE_NAME   = 'infraction';")[1];
-        return (int) json_decode(json_encode($temp), TRUE)["AUTO_INCREMENT"];
+        Where   TABLE_NAME   = 'infraction';")[0];
+        $temp =json_decode(json_encode($temp), TRUE);
+        return (int) $temp["AUTO_INCREMENT"];
     }
 
     private function loadQuery(array $result): array

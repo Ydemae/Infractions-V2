@@ -7,9 +7,6 @@
 
 <body>
     <p>
-        <?php
-        echo $testConduct;
-        ?>
     </p>
 </body>
 

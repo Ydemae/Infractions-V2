@@ -66,6 +66,12 @@ class ConducteurDAO
         }
         return $unConduct;
     }
+    function isAdminID(string $num): bool
+    {
+        if (!$this->existe($num)) return false;
+        $res = $this->getByNum($num);
+        return $res->getAdmin();
+    }
 
     function existe(string $num_permis): bool
     {
