@@ -91,21 +91,22 @@ CREATE TABLE `conducteur` (
   `date_permis` date NOT NULL,
   `nom` varchar(25) NOT NULL,
   `prenom` varchar(25) NOT NULL,
-  `mot_de_passe` varchar(78) NOT NULL
+  `mot_de_passe` varchar(78) NOT NULL,
+  `is_admin` boolean DEFAULT False
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `conducteur`
 --
 
-INSERT INTO `conducteur` (`num_permis`, `date_permis`, `nom`, `prenom`, `mot_de_passe`) VALUES
-('AZ67', '2011-02-01', 'AIRPACH', 'Fabrice', 'Fab-AIR67_'),
-('AZ69', '2011-02-01', 'CAVALLI', 'Frédéric', '!CaVfred6'),
-('AZ71', '2017-02-02', 'MANGONI', 'Joseph', 'Jojo71A'),
-('AZ81', '1997-04-09', 'GAUDE', 'David', '01David.m3'),
-('AZ90', '2000-05-04', 'KIEFFER', 'Claudine', 'ClaudKI9A'),
-('AZ92', '2001-04-06', 'THEOBALD', 'Pascal', 'PasCal1boss'),
-('AZ99', '2003-09-06', 'CAMARA', 'Souleymane', 'SouleeeeeyCAM999?');
+INSERT INTO `conducteur` (`num_permis`, `date_permis`, `nom`, `prenom`, `mot_de_passe`, `is_admin`) VALUES
+('AZ67', '2011-02-01', 'AIRPACH', 'Fabrice', 'Fab-AIR67_', True),
+('AZ69', '2011-02-01', 'CAVALLI', 'Frédéric', '!CaVfred6', False),
+('AZ71', '2017-02-02', 'MANGONI', 'Joseph', 'Jojo71A', False),
+('AZ81', '1997-04-09', 'GAUDE', 'David', '01David.m3', False),
+('AZ90', '2000-05-04', 'KIEFFER', 'Claudine', 'ClaudKI9A', False),
+('AZ92', '2001-04-06', 'THEOBALD', 'Pascal', 'PasCal1boss', False),
+('AZ99', '2003-09-06', 'CAMARA', 'Souleymane', 'SouleeeeeyCAM999?', False);
 
 -- --------------------------------------------------------
 

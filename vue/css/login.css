@@ -1,0 +1,17 @@
+body {
+    font-family : Arial;
+}
+
+body, h1, p {
+    text-align : center;
+}
+
+h1 {
+    font-weight : lighter;
+    font-size   : 1.4em;
+    line-height : 2em;
+}
+
+section {
+    border : 2px solid silver;
+}
