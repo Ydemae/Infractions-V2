@@ -28,7 +28,7 @@ input {
   padding-top: 0.2em;
 }
 
-input[type=button] {
+input[type=submit] {
   cursor: pointer;
   font-size: 1.2em;
   border: none;
@@ -37,30 +37,40 @@ input[type=button] {
 }
 
 
-input[type=button]:hover {
+input[type=submit]:hover {
   background-color: #0000ff;
   border: 1px solid #ffffff;
   color: #ffffff;
 }
 
-input[type=button].btnannuler {
+input[type=submit].btnannuler {
   background-color: #ff7000;
 }
 
-input[type=button].btnannuler:hover {
+input[type=submit].btnannuler:hover {
   background-color: #ff0000;
   border: 1px solid #ffffff;
   color: #ffffff;
 }
 
-input[type=button].btnretour {
+input[type=submit].btnretour {
   background-color: #00ff00;
 }
 
-input[type=button].btnretour:hover {
+input[type=submit].btnretour:hover {
   background-color: #00D000;
   border: 1px solid #ffffff;
   color: #ffffff;
+}
+
+#btn_visu {
+  border: none;
+  padding: 10px;
+  background: url(visu.png) no-repeat center center;
+
+  /*pour cacher le text*/
+  color: transparent; /* make the text invisible */
+  user-select: none; /* prevent selection of the text */
 }
 
 

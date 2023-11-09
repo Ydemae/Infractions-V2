@@ -1,4 +1,5 @@
 <?php
+//Important : Modifier $affi en un autre truc à un moment car c'est pas clair
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -17,6 +18,11 @@ if (isset($_POST['a'])){
     header('location: inf_edit.php');
 }
 
+if(isset($_POST['infVisu'])){
+    $_SESSION['numInf'] = $_POST['infVisu'][0];
+    header('location: inf_edit.php');
+}
+
 $affi = "";
 $InfDAO = new InfractionDAO();
 $ConductDAO = new ConducteurDAO();
@@ -32,12 +38,10 @@ else{
     $allInfs = $InfDAO->getByNumPermis($_SESSION['numPermis']);
 }
 
-
-
 for($i = 0; $i < count($allInfs); $i ++){
     $ExplodedDate = explode( '-', $allInfs[$i]->getDateInf());
     $newDate = $ExplodedDate[2] . '/' . $ExplodedDate[1] . '/' . $ExplodedDate[0];
-    $affi .= '<tr><td><a href=""><img src="../../vue/css/visu.png" alt=""></a></td><td>' . $allInfs[$i]->getNumInf() . "</td><td>" . $newDate . "</td><td>" . $allInfs[$i]->getImmat() . "</td><td>";
+    $affi .= '<tr><td><form action="inf_liste.php" method="POST"><input type="submit" name="infVisu[]" id="btn_visu" value="'.  $allInfs[$i]->getNumInf() . '"></form></td><td>' . $allInfs[$i]->getNumInf() . "</td><td>" . $newDate . "</td><td>" . $allInfs[$i]->getImmat() . "</td><td>";
     if ($allInfs[$i]->getNumPermis() != ''){
         $Cond = $ConductDAO->getById($allInfs[$i]->getNumPermis());
         $affi .= $allInfs[$i]->getNumPermis() . ' ' . $Cond->getNom() . ' ' . $Cond->getPrenom() . '</td>';

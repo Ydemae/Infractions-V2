@@ -1,5 +1,6 @@
 body {
     font-family : Arial;
+    text-align: center;
 }
 
 .center{
@@ -12,14 +13,14 @@ body {
     flex-direction: column;
 }
 
-h1, p{
-    text-align: center;
-}
-
 h1 {
     font-weight : lighter;
     font-size   : 1.4em;
     line-height : 2em;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 section {

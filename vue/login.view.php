@@ -24,18 +24,21 @@
             <form action="login.php" method="POST">
                 <div class="flexbox">
                     <span>
-                        <label>Identifiant :</label>
-                        <input type="text" name="login" Autocomplete="Off" />
-                        <br>
+                        <div class="grid">
+                            <label>Numéro de permis :</label>
+                            <input type="text" name="login" Autocomplete="Off" />
+                        </div>
                         <label class="error"><?php echo $error["login"]; ?></label>
                     </span>
                     <span>
-                        <label>Mot de passe :</label>
-                        <input type="password" name="password" Autocomplete="Off" />
-                        <br>
+                        <div class="grid">
+                            <label>Mot de passe :</label>
+                            <input type="password" name="password" Autocomplete="Off" />
+                        </div>
                         <label class="error"> <?php echo $error["password"]; ?></label>
                     </span>
                     <span>
+                        <br>
                         <label class="error"><?php echo $error['connect']; ?></label>
                     </span>
                     <span>

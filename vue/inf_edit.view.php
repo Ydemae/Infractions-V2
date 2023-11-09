@@ -4,8 +4,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Edition d'une infraction</title>
-    <link type="text/css" rel="stylesheet" href="./css/inf_liste.css">
-    <link type="text/css" rel="stylesheet" href="./css/inf_edit.css">
+    <link type="text/css" rel="stylesheet" href="../../vue/css/inf_liste.css">
+    <link type="text/css" rel="stylesheet" href="../../vue/css/inf_edit.css">
 </head>
 
 <body>
@@ -74,7 +74,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody> </tbody>
+                    <tbody><?php echo $listeDelits ?></tbody>
                 </table>
                 <div class="divaction">
                     <input id="btn_delit_ajouter" type="button" value="Ajouter">
@@ -96,11 +96,11 @@
                 </div>
             </div>
         </div>
-        <div class="divaction">
-            <input id="btn_inf_retour" class="btnretour" value="Retour" type="button">
-            <input id="btn_inf_valider" value="Valider" type="button">
-            <input id="btn_inf_annuler" class="btnannuler" value="Annuler" type="button">
-        </div>
+        <form class="divaction" action="inf_edit.php" method="POST">
+            <input id="btn_inf_retour" class="btnretour" name="retour" value="Retour" type="submit">
+            <input id="btn_inf_valider" value="Valider" name="Valider" type="submit">
+            <input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">
+        </form>
     </div>
 </body>
 <script type="module" src="../controleur/inf_edit.js"></script>
