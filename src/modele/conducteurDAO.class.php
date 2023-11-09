@@ -57,7 +57,7 @@ class ConducteurDAO
         return ($this->loadQuery($this->bd->execSQL($this->select)));
     }
 
-    function getByNum(string $num): Conducteur
+    function getById(string $num): Conducteur
     {
         $unConduct = new Conducteur();
         $lesConducts = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_permis=:num", [':num' => $num]));
@@ -69,7 +69,7 @@ class ConducteurDAO
     function isAdminID(string $num): bool
     {
         if (!$this->existe($num)) return false;
-        $res = $this->getByNum($num);
+        $res = $this->getById($num);
         return $res->getAdmin();
     }
 

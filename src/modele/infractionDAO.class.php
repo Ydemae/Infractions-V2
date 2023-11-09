@@ -86,6 +86,11 @@ class InfractionDAO
         }
         return $uneInf;
     }
+    function getByNumPermis(string $num_permis): array
+    {
+        $lesInfractions = $this->loadQuery($this->bd->execSQL($this->select . " WHERE num_permis=:num_permis", [':num_permis' => $num_permis]));
+        return $lesInfractions;
+    }
 
     function existe(string $num_inf): bool
     {
