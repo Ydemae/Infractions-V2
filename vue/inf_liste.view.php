@@ -27,9 +27,7 @@
         </tbody>
     </table>
     <div class="divaction">
-        <form action="inf_edit.php">
-            <input id="btn_inf_ajouter" type="submit" name="a" value="Ajouter">
-        </form>
+    <?php echo $btn_inf_ajouter ?>
     </div>
 </body>
 <script type="module" src="../controleur/inf_liste.js"></script>

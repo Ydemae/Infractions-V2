@@ -13,13 +13,20 @@ if (!isset($_SESSION['open'])){
     header('location: login.php');
 }
 
+if (isset($_POST['a'])){
+    header('location: inf_edit.php');
+}
+
 $affi = "";
 $InfDAO = new InfractionDAO();
 $ConductDAO = new ConducteurDAO();
 $allInfs = [];
 
+$btn_edit_inf = '';
+
 if ($_SESSION['isAdmin']){
     $allInfs = $InfDAO->getAll();
+    $btn_inf_ajouter = '<form action="inf_edit.php"><input id="btn_inf_ajouter" type="submit" name="a" value="Ajouter"></form>';
 }
 else{
     $allInfs = $InfDAO->getByNumPermis($_SESSION['numPermis']);
@@ -40,8 +47,6 @@ for($i = 0; $i < count($allInfs); $i ++){
     }
     $affi .= '<td>' . $InfDAO->getTotal($allInfs[$i]->getNumInf()) . ' €</td><td></td><td></td></tr>';
 }
-session_unset();
-session_destroy();
 
 require_once "../../vue/inf_liste.view.php";
 ?>

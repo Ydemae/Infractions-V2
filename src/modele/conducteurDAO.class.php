@@ -9,20 +9,21 @@ class ConducteurDAO
     function __construct()
     {
         $this->bd = new Connexion();
-        $this->select = 'SELECT num_permis, date_permis, nom, prenom, mot_de_passe FROM conducteur ';
+        $this->select = 'SELECT num_permis, date_permis, nom, prenom, mot_de_passe, is_admin FROM conducteur ';
     }
 
     function insert(Conducteur $conduct): void
     {
-        $this->bd->execSQL("INSERT INTO conducteur (num_permis,date_permis, nom, prenom, mot_de_passe)
-                                        VALUES (:num_permis, :date_permis, :nom, :prenom, :mdp)"
+        $this->bd->execSQL("INSERT INTO conducteur (num_permis,date_permis, nom, prenom, mot_de_passe, is_admin)
+                                        VALUES (:num_permis, :date_permis, :nom, :prenom, :mdp, :admin)"
             ,
             [
                 ':num_permis' => $conduct->getNum(),
                 ':date_permis' => $conduct->getDatePermis(),
                 ':nom' => $conduct->getNom(),
                 ':prenom' => $conduct->getPrenom(),
-                ':mdp' => $conduct->getMdp()
+                ':mdp' => $conduct->getMdp(),
+                ':admin' => $conduct->getAdmin(),
             ]
         );
     }
@@ -47,6 +48,7 @@ class ConducteurDAO
             $conduct->setNom($row['nom']);
             $conduct->setPrenom($row['prenom']);
             $conduct->setMdp($row['mot_de_passe']);
+            $conduct->setAdmin($row['is_admin']);
             $conducts[] = $conduct;
         }
         return $conducts;

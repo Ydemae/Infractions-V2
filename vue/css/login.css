@@ -2,9 +2,18 @@ body {
     font-family : Arial;
 }
 
-body, h1, p {
-    margin      : 0;
-    text-align  : center;
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.flexbox{
+    display: flex;
+    flex-direction: column;
+}
+
+h1, p{
+    text-align: center;
 }
 
 h1 {
