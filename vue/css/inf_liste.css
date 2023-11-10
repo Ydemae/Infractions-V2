@@ -65,13 +65,37 @@ input[type=submit].btnretour:hover {
 
 #btn_visu {
   border: none;
-  padding: 10px;
+  padding: 15px;
   background: url(visu.png) no-repeat center center;
 
   /*pour cacher le text*/
-  color: transparent; /* make the text invisible */
-  user-select: none; /* prevent selection of the text */
+  text-indent: -9999px;
+  color: transparent;
+  user-select: none;
 }
+
+#btn_edit {
+  border: none;
+  padding: 15px;
+  background: url(modification.png) no-repeat center center;
+
+  /*pour cacher le text*/
+  text-indent: -9999px;
+  color: transparent;
+  user-select: none;
+}
+
+#btn_suppr {
+  border: none;
+  padding: 15px;
+  background: url(corbeille.png) no-repeat center center;
+
+  /*pour cacher le text*/
+  text-indent: -9999px;
+  color: transparent;
+  user-select: none;
+}
+
 
 
 select {
@@ -147,21 +171,21 @@ table tr:nth-child(2n) {
   background-color: white;
 }
 
-.img_visu{
+.img_visu {
   width: 30px;
   height: 30px;
   background: no-repeat center url(visu.png);
   display: block;
 }
 
-.img_modification{
+.img_modification {
   width: 30px;
   height: 30px;
   background: no-repeat center url(modification.png);
   display: block;
 }
 
-.img_corbeille{
+.img_corbeille {
   width: 30px;
   height: 30px;
   background: no-repeat center url(corbeille.png);

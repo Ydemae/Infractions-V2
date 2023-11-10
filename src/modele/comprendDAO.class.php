@@ -27,9 +27,17 @@ class ComprendDAO
     function delete(string $num_inf, string $num_delit): void
     {
         $this->bd->execSQL(
-            "DELETE FROM DELIT WHERE id_delit = :numD AND id_inf = :numI"
+            "DELETE FROM comprend WHERE id_delit = :numD AND id_inf = :numI"
             ,
             [':numD' => $num_delit, ':numI' => $num_inf]
+        );
+    }
+    function deleteByNumInf(string $num_inf): void
+    {
+        $this->bd->execSQL(
+            "DELETE FROM comprend WHERE id_inf = :numI"
+            ,
+            [':numI' => $num_inf]
         );
     }
 

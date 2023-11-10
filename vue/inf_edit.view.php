@@ -14,27 +14,32 @@
         <div class="inf_rubrique">
             <div>
                 <span class="labeltitre">IDENTIFICATION</span>
-                <label id="lbl_erreur_num" class="labelerreur"></label>
+                <label id="lbl_erreur_num" class="labelerreur">
+                    <?php echo $error['numInf']; ?>
+                </label>
             </div>
             <div>
-                
+
                 <label for="edt_inf_num">numéro</label>
                 <span><input id="edt_inf_num" placeholder="n° inf" size="5" type="text"></span>
-                
-                
-                
-                <span><label for="edt_inf_date">Le</label><input id="edt_inf_date" placeholder="date de l'infraction" size="30" type="date"><label id="lbl_erreur_date" class="labelerreur"></label></span>
-                
-                
+
+
+
+                <span><label for="edt_inf_date">Le</label><input id="edt_inf_date" placeholder="date de l'infraction"
+                        size="30" type="date"><label id="lbl_erreur_date" class="labelerreur"></label></span>
+
+
             </div>
         </div>
         <div class="inf_rubrique">
             <div>
                 <span class="labeltitre">VEHICULE</span>
-                <label id="lbl_erreur_immat" class="labelerreur"></label>
+                <label id="lbl_erreur_immat" class="labelerreur">
+                    <?php echo $error['immat']; ?>
+                </label>
             </div>
             <div>
-                
+
                 <label for="edt_inf_immat">Immatriculation</label>
                 <span><input id="edt_inf_immat" placeholder="n°immat" size="8" type="text"></span>
                 <div>
@@ -46,7 +51,9 @@
         <div class="inf_rubrique">
             <div>
                 <span class="labeltitre">CONDUCTEUR</span>
-                <label id="lbl_conduct_erreur" class="labelerreur"></label>
+                <label id="lbl_conduct_erreur" class="labelerreur">
+                    <?php echo $error['conducteur']; ?>
+                </label>
             </div>
             <div>
                 <label for="edt_inf_permis">n°permis</label>
@@ -57,14 +64,18 @@
         <div class="inf_rubrique">
             <div>
                 <span class="labeltitre">DELIT</span>
-                <label id="lbl_erreur_delit" class="labelerreur"></label>
+                <label id="lbl_erreur_delit" class="labelerreur">
+                    <?php echo $error['delit']; ?>
+                </label>
             </div>
         </div>
         <div class="inf_sousrubrique">
             <div id="div_inf_delit">
                 <div class="divtitre">
-                    Montant total de l'amande :
-                    <label id="lbl_delit_total"> </label>
+                    Montant total de l'amende :
+                    <label id="lbl_delit_total">
+                        <?php echo $totalAmende; ?>
+                    </label>
                 </div>
                 <table id="table_delit">
                     <thead>
@@ -74,7 +85,9 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody><?php echo $listeDelits ?></tbody>
+                    <tbody>
+                        <?php echo $listeDelits ?>
+                    </tbody>
                 </table>
                 <div class="divaction">
                     <input id="btn_delit_ajouter" type="button" value="Ajouter">
@@ -85,7 +98,9 @@
                 <div class="delit_rubrique">
                     <div>
                         <select id="select_delit" size="6"></select>
-                        <div><label id="lbl_erreur_select_delit" class="labelerreur"></label></div>
+                        <div><label id="lbl_erreur_select_delit" class="labelerreur">
+                                <?php echo $error['selectDelit']; ?>
+                            </label></div>
                     </div>
                     <div>
                         <div>
