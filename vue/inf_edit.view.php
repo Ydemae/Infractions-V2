@@ -29,8 +29,9 @@
 
                     <span><label for="edt_inf_date">Le</label><input <?php echo $InputDateInfDisabled; ?>
                             id="edt_inf_date" placeholder="date de l'infraction" size="30" name="dateInf" type="date"
-                            value="<?php echo $dateInf; ?>"><label id="lbl_erreur_date"
-                            class="labelerreur"></label></span>
+                            value="<?php echo $dateInf; ?>"><label id="lbl_erreur_date" class="labelerreur">
+                            <?php echo $error['date']; ?>
+                        </label></span>
 
 
                 </div>
@@ -45,9 +46,11 @@
                 <div>
 
                     <label for="edt_inf_immat">Immatriculation</label>
-                    <span><input id="edt_inf_immat" placeholder="n°immat" size="8" type="text"></span>
+                    <span><input id="edt_inf_immat" placeholder="n°immat" name="immat" size="8" type="text"
+                            value="<?php echo $numImmat; ?>"></span>
                     <div>
                         <label id="lbl_inf_detail_vehic" class="inf_commentaire"></label>
+                        <?php //NE PAS OUBLIER DE METTRE LES DETAILS DES VEHIC ET PROPRIO ?>
                         <label id="lbl_inf_detail_proprio" class="inf_commentaire"></label>
                     </div>
                 </div>
@@ -61,7 +64,8 @@
                 </div>
                 <div>
                     <label for="edt_inf_permis">n°permis</label>
-                    <span><input id="edt_inf_permis" placeholder="n°permis" size="8" type="text"></span>
+                    <span><input id="edt_inf_permis" placeholder="n°permis" name="numPermis" size="8" type="text"
+                            value="<?php echo $numPermis; ?>"></span>
                     <label id="lbl_inf_detail_permis" class="inf_commentaire"></label>
                 </div>
             </div>
@@ -94,7 +98,7 @@
                         </tbody>
                     </table>
                     <div class="divaction">
-                        <input id="btn_delit_ajouter" type="button" value="Ajouter">
+                        <input id="btn_delit_ajouter" type="submit" value="Ajouter">
                     </div>
                 </div>
                 <div id="div_inf_delit_edit">
@@ -121,6 +125,5 @@
         </form>
     </div>
 </body>
-<script type="module" src="../controleur/inf_edit.js"></script>
 
 </html>

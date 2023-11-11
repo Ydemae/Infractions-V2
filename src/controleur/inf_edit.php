@@ -31,6 +31,7 @@ if (isset($_POST['Valider'])) {
 //Initialisation des messages d'erreurs
 $error = [];
 $error['numInf'] = '';
+$error['date'] = '';
 $error['immat'] = '';
 $error['conducteur'] = '';
 $error['delit'] = '';
@@ -49,15 +50,21 @@ $inf = $infractionDAO->getByNumInf($num_inf);
 $buttons = "";
 $InputDateInfDisabled = '';
 $dateInf = "";
+$numImmat = "";
+$numPermis = "";
 if ($_SESSION['op'] == "v") {
     $buttons = '<input id="btn_inf_retour" class="btnretour" name="retour" value="Retour" type="submit">';
     $InputDateInfDisabled = "disabled";
     $dateInf = $inf->getDateInf();
+    $numImmat = $inf->getImmat();
+    $numPermis = $inf->getNumPermis();
 } else if ($_SESSION['op'] == "a") {
     $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
 } else {
     $InputDateInfDisabled = "disabled";
     $dateInf = $inf->getDateInf();
+    $numImmat = $inf->getImmat();
+    $numPermis = $inf->getNumPermis();
     $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
 }
 
@@ -88,7 +95,7 @@ if ($_SESSION['op'] == 'v') {
     }
 } else {
     foreach ($listDels as $del) {
-        $listeDelits .= "<tr><td>" . $del->getNature() . "</td><td>" . $del->getTarif() . "</td><td><form action='inf_edit.php' method='POST'><input type='submit' name='DelSuppr[]' value='" . $del->getNumDelit() . "' ></form></td></tr>";
+        $listeDelits .= "<tr><td>" . $del->getNature() . "</td><td>" . $del->getTarif() . "</td><td><form action='inf_edit.php' method='POST'><input type='submit' id='btn_suppr' name='DelSuppr[]' value='" . $del->getNumDelit() . "' ></form></td></tr>";
     }
 }
 
