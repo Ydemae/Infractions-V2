@@ -95,6 +95,9 @@ if (isset($_POST['delitValider'])) {
 
 
 if (isset($_POST['Valider'])) {
+    if ($_SESSION['op'] != 'a' && $_SESSION['op'] != 'e') {
+        throw new Error("Tu n'es pas censé être là");
+    }
     $anError = false;
     $date = isset($_POST['dateInf']) ? $_POST['dateInf'] : null;
     $Immat = isset($_POST['immat']) ? $_POST['immat'] : null;
