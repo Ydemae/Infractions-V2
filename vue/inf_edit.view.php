@@ -98,26 +98,10 @@
                         </tbody>
                     </table>
                     <div class="divaction">
-                        <input id="btn_delit_ajouter" type="submit" value="Ajouter">
+                        <input id="btn_delit_ajouter" type="submit" name="AjouterDel" value="Ajouter">
                     </div>
                 </div>
-                <div id="div_inf_delit_edit">
-                    <div class="divtitre">Choisir un équipement dans la liste</div>
-                    <div class="delit_rubrique">
-                        <div>
-                            <select id="select_delit" size="6"></select>
-                            <div><label id="lbl_erreur_select_delit" class="labelerreur">
-                                    <?php echo $error['selectDelit']; ?>
-                                </label></div>
-                        </div>
-                        <div>
-                            <div>
-                                <input id="btn_delit_valider" type="button">
-                                <input id="btn_delit_annuler" type="button">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php echo $selectDelit ?>
             </div>
             <div class="divaction">
                 <?php echo $buttons; ?>

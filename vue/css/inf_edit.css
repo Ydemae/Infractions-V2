@@ -48,14 +48,16 @@
     background: url(annuler.png) no-repeat center center;
 }
 
-.vehic_rubrique{
+.vehic_rubrique {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
 .inf_rub div:nth-child(1) {
     /* 1er enfant "div" de classe style "rubrique" */
     grid-template-columns: 1fr 9fr;
 }
+
 .inf_rub div:nth-child(1n) {
     /* chaque "div" enfant de classe style "rubrique" */
     min-height: 30px;

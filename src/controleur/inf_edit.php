@@ -20,13 +20,33 @@ if (isset($_POST['retour']) || isset($_POST['Annuler'])) {
     unset($_SESSION['numInf']);
     header('location: inf_liste.php');
 }
+
 if (isset($_POST['Valider'])) {
 
 }
 
 
+$selectDelit = '';
 
-
+if (isset($_POST['AjouterDel'])) {
+    $selectDelit = '<div id="div_inf_delit_edit">
+<div class="divtitre">Choisir un délit dans la liste</div>
+<div class="delit_rubrique">
+    <div>
+        <select id="select_delit" size="6"></select>
+        <div><label id="lbl_erreur_select_delit" class="labelerreur">
+                <?php echo $error["selectDelit"]; ?>
+            </label></div>
+    </div>
+    <div>
+        <div>
+            <input id="btn_delit_valider" type="submit" name="delitValider" value = "">
+            <input id="btn_delit_annuler" type="submit" name="delitAnnuler" value = "">
+        </div>
+    </div>
+</div>
+</div>"';
+}
 
 //Initialisation des messages d'erreurs
 $error = [];
@@ -46,6 +66,7 @@ $num_inf = $_SESSION['numInf'];
 $inf = $infractionDAO->getByNumInf($num_inf);
 
 
+
 //Affichage des boutons de retour, d'annulation et de validation + gestion des champs disabled
 $buttons = "";
 $InputDateInfDisabled = '';
@@ -60,6 +81,7 @@ if ($_SESSION['op'] == "v") {
     $numPermis = $inf->getNumPermis();
 } else if ($_SESSION['op'] == "a") {
     $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
+    $dateInf = date("Y-m-d");
 } else {
     $InputDateInfDisabled = "disabled";
     $dateInf = $inf->getDateInf();
