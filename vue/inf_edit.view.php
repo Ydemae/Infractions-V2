@@ -15,9 +15,6 @@
             <div class="inf_rubrique">
                 <div>
                     <span class="labeltitre">IDENTIFICATION</span>
-                    <label id="lbl_erreur_num" class="labelerreur">
-                        <?php echo $error['numInf']; ?>
-                    </label>
                 </div>
                 <div>
 

@@ -38,8 +38,8 @@ class InfractionDAO
     {
         $temp = $this->bd->execSQL("SELECT `AUTO_INCREMENT`
         FROM  INFORMATION_SCHEMA.TABLES
-        Where   TABLE_NAME   = 'infraction';")[0];
-        $temp =json_decode(json_encode($temp), TRUE);
+        Where   TABLE_NAME   = 'infraction';")[1];
+        $temp = json_decode(json_encode($temp), TRUE);
         return (int) $temp["AUTO_INCREMENT"];
     }
 
@@ -63,14 +63,15 @@ class InfractionDAO
         return ($this->loadQuery($this->bd->execSQL($this->select)));
     }
 
-    function getTotal(string $num) : float{
+    function getTotal(string $num): float
+    {
         require_once "../modele/comprendDAO.class.php";
         require_once "../modele/delitDAO.class.php";
         $comprendDAO = new ComprendDAO();
         $delitDAO = new DelitDAO();
         $dels = $comprendDAO->getByNumInf($num);
         $somme = 0;
-        foreach($dels as $del){
+        foreach ($dels as $del) {
             $num_del = $del->getNumDelit();
             $somme += floatval($delitDAO->getbyId($num_del)->getTarif());
         }

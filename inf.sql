@@ -38,6 +38,7 @@ CREATE TABLE `comprend` (
   `id_delit` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
 --
 -- Déchargement des données de la table `comprend`
 --

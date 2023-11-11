@@ -3,6 +3,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+
 require_once "../modele/infractionDAO.class.php";
 require_once "../modele/conducteurDAO.class.php";
 require_once "../modele/comprendDAO.class.php";

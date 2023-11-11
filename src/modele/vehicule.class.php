@@ -20,7 +20,7 @@ class Vehicule
     {
         return $this->immat;
     }
-    function setImmat(int $num)
+    function setImmat(string $num)
     {
         $this->immat = $num;
     }
