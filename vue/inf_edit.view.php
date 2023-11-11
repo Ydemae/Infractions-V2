@@ -98,7 +98,7 @@
                         </tbody>
                     </table>
                     <div class="divaction">
-                        <input id="btn_delit_ajouter" type="submit" name="AjouterDel" value="Ajouter">
+                        <?php echo $BtnAjouterDelit; ?>
                     </div>
                 </div>
                 <?php echo $selectDelit ?>
