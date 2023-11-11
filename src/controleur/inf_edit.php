@@ -11,8 +11,22 @@ session_start();
 if (!isset($_SESSION['open'])) {
     header('location: login.php');
 } else if (!isset($_SESSION['numInf'])) {
+    unset($_SESSION['op']);
     header('location: inf_liste.php');
 }
+
+if (isset($_POST['retour']) || isset($_POST['Annuler'])) {
+    unset($_SESSION['op']);
+    unset($_SESSION['numInf']);
+    header('location: inf_liste.php');
+}
+if (isset($_POST['Valider'])) {
+
+}
+
+
+
+
 
 //Initialisation des messages d'erreurs
 $error = [];
@@ -23,13 +37,32 @@ $error['delit'] = '';
 $error['selectDelit'] = '';
 
 
+//Création des DAO
 $comprendDAO = new ComprendDAO();
 $delitDAO = new DelitDAO();
 $infractionDAO = new InfractionDAO();
 $num_inf = $_SESSION['numInf'];
+$inf = $infractionDAO->getByNumInf($num_inf);
+
+
+//Affichage des boutons de retour, d'annulation et de validation + gestion des champs disabled
+$buttons = "";
+$InputDateInfDisabled = '';
+$dateInf = "";
+if ($_SESSION['op'] == "v") {
+    $buttons = '<input id="btn_inf_retour" class="btnretour" name="retour" value="Retour" type="submit">';
+    $InputDateInfDisabled = "disabled";
+    $dateInf = $inf->getDateInf();
+} else if ($_SESSION['op'] == "a") {
+    $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
+} else {
+    $InputDateInfDisabled = "disabled";
+    $dateInf = $inf->getDateInf();
+    $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
+}
+
 
 $totalAmende = $infractionDAO->getTotal($num_inf) . " €"; // variable qu'on va echo en tant que total à payer
-
 
 //Gestion de la liste des délits
 $listComprend = $comprendDAO->getByNumInf($num_inf);

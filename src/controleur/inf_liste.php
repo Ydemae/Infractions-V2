@@ -49,7 +49,7 @@ $btn_edit_inf = '';
 
 if ($_SESSION['isAdmin']) {
     $allInfs = $InfDAO->getAll();
-    $btn_inf_ajouter = '<form action="inf_edit.php"><input id="btn_inf_ajouter" type="submit" name="a" value="Ajouter"></form>';
+    $btn_inf_ajouter = '<form action="inf_liste.php" method="POST"><input type="submit" id="btn_inf_ajouter" name="a" value="Ajouter"></form>';
 } else {
     $allInfs = $InfDAO->getByNumPermis($_SESSION['numPermis']);
 }

@@ -11,110 +11,113 @@
 <body>
     <div id="div_inf_titre" class="divtitre"> Détail d'une Infraction</div>
     <div id="div_inf_detail">
-        <div class="inf_rubrique">
-            <div>
-                <span class="labeltitre">IDENTIFICATION</span>
-                <label id="lbl_erreur_num" class="labelerreur">
-                    <?php echo $error['numInf']; ?>
-                </label>
-            </div>
-            <div>
-
-                <label for="edt_inf_num">numéro</label>
-                <span><input id="edt_inf_num" placeholder="n° inf" size="5" type="text"></span>
-
-
-
-                <span><label for="edt_inf_date">Le</label><input id="edt_inf_date" placeholder="date de l'infraction"
-                        size="30" type="date"><label id="lbl_erreur_date" class="labelerreur"></label></span>
-
-
-            </div>
-        </div>
-        <div class="inf_rubrique">
-            <div>
-                <span class="labeltitre">VEHICULE</span>
-                <label id="lbl_erreur_immat" class="labelerreur">
-                    <?php echo $error['immat']; ?>
-                </label>
-            </div>
-            <div>
-
-                <label for="edt_inf_immat">Immatriculation</label>
-                <span><input id="edt_inf_immat" placeholder="n°immat" size="8" type="text"></span>
+        <form action="inf_edit.php" method="POST">
+            <div class="inf_rubrique">
                 <div>
-                    <label id="lbl_inf_detail_vehic" class="inf_commentaire"></label>
-                    <label id="lbl_inf_detail_proprio" class="inf_commentaire"></label>
-                </div>
-            </div>
-        </div>
-        <div class="inf_rubrique">
-            <div>
-                <span class="labeltitre">CONDUCTEUR</span>
-                <label id="lbl_conduct_erreur" class="labelerreur">
-                    <?php echo $error['conducteur']; ?>
-                </label>
-            </div>
-            <div>
-                <label for="edt_inf_permis">n°permis</label>
-                <span><input id="edt_inf_permis" placeholder="n°permis" size="8" type="text"></span>
-                <label id="lbl_inf_detail_permis" class="inf_commentaire"></label>
-            </div>
-        </div>
-        <div class="inf_rubrique">
-            <div>
-                <span class="labeltitre">DELIT</span>
-                <label id="lbl_erreur_delit" class="labelerreur">
-                    <?php echo $error['delit']; ?>
-                </label>
-            </div>
-        </div>
-        <div class="inf_sousrubrique">
-            <div id="div_inf_delit">
-                <div class="divtitre">
-                    Montant total de l'amende :
-                    <label id="lbl_delit_total">
-                        <?php echo $totalAmende; ?>
+                    <span class="labeltitre">IDENTIFICATION</span>
+                    <label id="lbl_erreur_num" class="labelerreur">
+                        <?php echo $error['numInf']; ?>
                     </label>
                 </div>
-                <table id="table_delit">
-                    <thead>
-                        <tr>
-                            <th>nature</th>
-                            <th>tarif</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php echo $listeDelits ?>
-                    </tbody>
-                </table>
-                <div class="divaction">
-                    <input id="btn_delit_ajouter" type="button" value="Ajouter">
+                <div>
+
+                    <label for="edt_inf_num">numéro</label>
+                    <span><input disabled id="edt_inf_num" placeholder="n° inf" size="5" type="text"
+                            value="<?php echo $num_inf ?>"></span>
+
+
+
+                    <span><label for="edt_inf_date">Le</label><input <?php echo $InputDateInfDisabled; ?>
+                            id="edt_inf_date" placeholder="date de l'infraction" size="30" name="dateInf" type="date"
+                            value="<?php echo $dateInf; ?>"><label id="lbl_erreur_date"
+                            class="labelerreur"></label></span>
+
+
                 </div>
             </div>
-            <div id="div_inf_delit_edit">
-                <div class="divtitre">Choisir un équipement dans la liste</div>
-                <div class="delit_rubrique">
+            <div class="inf_rubrique">
+                <div>
+                    <span class="labeltitre">VEHICULE</span>
+                    <label id="lbl_erreur_immat" class="labelerreur">
+                        <?php echo $error['immat']; ?>
+                    </label>
+                </div>
+                <div>
+
+                    <label for="edt_inf_immat">Immatriculation</label>
+                    <span><input id="edt_inf_immat" placeholder="n°immat" size="8" type="text"></span>
                     <div>
-                        <select id="select_delit" size="6"></select>
-                        <div><label id="lbl_erreur_select_delit" class="labelerreur">
-                                <?php echo $error['selectDelit']; ?>
-                            </label></div>
+                        <label id="lbl_inf_detail_vehic" class="inf_commentaire"></label>
+                        <label id="lbl_inf_detail_proprio" class="inf_commentaire"></label>
                     </div>
-                    <div>
+                </div>
+            </div>
+            <div class="inf_rubrique">
+                <div>
+                    <span class="labeltitre">CONDUCTEUR</span>
+                    <label id="lbl_conduct_erreur" class="labelerreur">
+                        <?php echo $error['conducteur']; ?>
+                    </label>
+                </div>
+                <div>
+                    <label for="edt_inf_permis">n°permis</label>
+                    <span><input id="edt_inf_permis" placeholder="n°permis" size="8" type="text"></span>
+                    <label id="lbl_inf_detail_permis" class="inf_commentaire"></label>
+                </div>
+            </div>
+            <div class="inf_rubrique">
+                <div>
+                    <span class="labeltitre">DELIT</span>
+                    <label id="lbl_erreur_delit" class="labelerreur">
+                        <?php echo $error['delit']; ?>
+                    </label>
+                </div>
+            </div>
+            <div class="inf_sousrubrique">
+                <div id="div_inf_delit">
+                    <div class="divtitre">
+                        Montant total de l'amende :
+                        <label id="lbl_delit_total">
+                            <?php echo $totalAmende; ?>
+                        </label>
+                    </div>
+                    <table id="table_delit">
+                        <thead>
+                            <tr>
+                                <th>nature</th>
+                                <th>tarif</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php echo $listeDelits ?>
+                        </tbody>
+                    </table>
+                    <div class="divaction">
+                        <input id="btn_delit_ajouter" type="button" value="Ajouter">
+                    </div>
+                </div>
+                <div id="div_inf_delit_edit">
+                    <div class="divtitre">Choisir un équipement dans la liste</div>
+                    <div class="delit_rubrique">
                         <div>
-                            <input id="btn_delit_valider" type="button">
-                            <input id="btn_delit_annuler" type="button">
+                            <select id="select_delit" size="6"></select>
+                            <div><label id="lbl_erreur_select_delit" class="labelerreur">
+                                    <?php echo $error['selectDelit']; ?>
+                                </label></div>
+                        </div>
+                        <div>
+                            <div>
+                                <input id="btn_delit_valider" type="button">
+                                <input id="btn_delit_annuler" type="button">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form class="divaction" action="inf_edit.php" method="POST">
-            <input id="btn_inf_retour" class="btnretour" name="retour" value="Retour" type="submit">
-            <input id="btn_inf_valider" value="Valider" name="Valider" type="submit">
-            <input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">
+            <div class="divaction">
+                <?php echo $buttons; ?>
+            </div>
         </form>
     </div>
 </body>
