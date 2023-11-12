@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <div id="div_inf_titre" class="divtitre"> Détail d'une Infraction</div>
+    <div id="div_inf_titre" class="divtitre"> Détail d'une Infraction <a href="logout.php" class="link_right">se
+            déconnecter</a></div>
     <div id="div_inf_detail">
         <form action="inf_edit.php" method="POST">
             <div class="inf_rubrique">

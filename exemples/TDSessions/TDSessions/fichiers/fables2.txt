@@ -1,5 +1,0 @@
-fables2.txt : 
-Le corbeau et le Renard - Jean de La Fontaine
-Maître Corbeau, sur un arbre perché,
-Tenait en son bec un fromage.
-Nombre de lignes : 3

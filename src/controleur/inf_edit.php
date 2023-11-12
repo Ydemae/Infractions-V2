@@ -81,6 +81,7 @@ if (!isset($_SESSION['delsAjouter']) || !isset($_SESSION['delsSupprimer'])) {
     $_SESSION['delsSupprimer'] = [];
 }
 
+//On gère l'ajout d'un délit
 if (isset($_POST['delitValider'])) {
     if (!isset($_POST['Delit'])) {
         $error['delit'] = "Veuillez sélectionner un délit avant de valider";
@@ -93,7 +94,7 @@ if (isset($_POST['delitValider'])) {
     }
 }
 
-
+//On gère la validation du formulaire
 if (isset($_POST['Valider'])) {
     if ($_SESSION['op'] != 'a' && $_SESSION['op'] != 'e') {
         throw new Error("Tu n'es pas censé être là");

@@ -8,7 +8,10 @@
 </head>
 
 <body>
-    <div id="div_inf_liste_titre" class="divtitre"> Liste des infs </div>
+    <div id="div_inf_liste_titre" class="divtitre"> Liste des infs <a href="logout.php" class="link_right">se
+            déconnecter</a>
+        <?php echo $btn_insert_file; ?>
+    </div>
     <table id="table_inf">
         <thead>
             <tr>
@@ -27,9 +30,8 @@
         </tbody>
     </table>
     <div class="divaction">
-    <?php echo $btn_inf_ajouter ?>
+        <?php echo $btn_inf_ajouter ?>
     </div>
 </body>
-<script type="module" src="../controleur/inf_liste.js"></script>
 
 </html>

@@ -1,32 +1,33 @@
-body {
-    font-family : Arial;
+body.login {
+    font-family: Arial;
     text-align: center;
 }
 
-.center{
+.center {
     display: flex;
     justify-content: center;
 }
 
-.flexbox{
+.flexbox {
     display: flex;
     flex-direction: column;
 }
 
 h1 {
-    font-weight : lighter;
-    font-size   : 1.4em;
-    line-height : 2em;
+    font-weight: lighter;
+    font-size: 1.4em;
+    line-height: 2em;
 }
-.grid{
+
+.grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
 }
 
 section {
-    border      : 2px solid silver;
-    max-width   : 400px;
-    margin      : 20px auto;
-    padding     : 10px;
+    border: 2px solid silver;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
     background-color: silver;
 }

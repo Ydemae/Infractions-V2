@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang ="fr">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="../../vue/css/main.css">
     <link rel="stylesheet" href="../../vue/css/login.css">
 </head>
-<body>
+
+<body class="login">
     <header>
         <section>
             <span></span>
@@ -28,21 +29,27 @@
                             <label>Numéro de permis :</label>
                             <input type="text" name="login" Autocomplete="Off" />
                         </div>
-                        <label class="error"><?php echo $error["login"]; ?></label>
+                        <label class="error">
+                            <?php echo $error["login"]; ?>
+                        </label>
                     </span>
                     <span>
                         <div class="grid">
                             <label>Mot de passe :</label>
                             <input type="password" name="password" Autocomplete="Off" />
                         </div>
-                        <label class="error"> <?php echo $error["password"]; ?></label>
+                        <label class="error">
+                            <?php echo $error["password"]; ?>
+                        </label>
                     </span>
                     <span>
                         <br>
-                        <label class="error"><?php echo $error['connect']; ?></label>
+                        <label class="error">
+                            <?php echo $error['connect']; ?>
+                        </label>
                     </span>
                     <span>
-                        <input type="submit" name="Connexion" value="Connexion"/>
+                        <input type="submit" name="Connexion" value="Connexion" />
                     </span>
                 </div>
             </form>

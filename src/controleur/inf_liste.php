@@ -47,10 +47,13 @@ $ConductDAO = new ConducteurDAO();
 $allInfs = [];
 
 $btn_edit_inf = '';
+$btn_insert_file = "";
+$btn_inf_ajouter = "";
 
 if ($_SESSION['isAdmin']) {
     $allInfs = $InfDAO->getAll();
     $btn_inf_ajouter = '<form action="inf_liste.php" method="POST"><input type="submit" id="btn_inf_ajouter" name="a" value="Ajouter"></form>';
+    $btn_insert_file = '<a href="inf_insert.php" class="link_right">Insérer un fichier Json</a>';
 } else {
     $allInfs = $InfDAO->getByNumPermis($_SESSION['numPermis']);
 }
