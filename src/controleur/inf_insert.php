@@ -19,7 +19,7 @@ $content = "";
 $successCode = "";
 
 if (!file_exists("../../fichiers/infractions_ext.json")) {
-    $fileError = "Le fichier d'extension des infractions n'a pas été trouvé.";
+    $fileError = "Le fichier d'extension des infractions n'a pas été trouvé.<br>Veuillez vérifier que votre fichier se nomme bien infractions_ext.json et se trouve dans le dossier fichiers";
 } else {
     $content = file_get_contents("../../fichiers/infractions_ext.json");
     $contentExploded = explode('}', $content);
@@ -28,16 +28,14 @@ if (!file_exists("../../fichiers/infractions_ext.json")) {
         $fichier .= $c . '}<br>';
     }
 
-    $errorCode = InsertInfExt($content);
-    if ($errorCode == 1) {
-        $fileError = "L'insertion n'a pas pu être effectuée, veuillez vérifier le format du fichier json.<br>Exemple de ligne correcte :" . '{"date_inf":"05/10/2023","num_immat":"AA643BB","num_permis": "AZ71","délits" :[1]}';
-    } else {
-        $successCode = "L'insetion a bien été effectuée, vous pouvez retourner à la liste des infractions";
+    if (isset($_POST['Inserer'])) {
+        $errorCode = InsertInfExt($content);
+        if ($errorCode == 1) {
+            $fileError = "L'insertion n'a pas pu être effectuée, veuillez vérifier le format du fichier json.<br>Exemple de ligne correcte :" . '{"date_inf":"05/10/2023","num_immat":"AA643BB","num_permis": "AZ71","délits" :[1]}';
+        } else {
+            $successCode = "L'insetion a bien été effectuée, vous pouvez retourner à la liste des infractions";
+        }
     }
-}
-
-if (isset($_POST['Inserer'])) {
-
 }
 
 

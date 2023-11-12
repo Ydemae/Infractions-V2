@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div id="div_inf_titre" class="divtitre">Insertion des nouvelles infractions <a href="inf_liste.php"
-            class="link_right">retour à la liste des infractions</a> <a href="logout.php" class="link_right">se
-            déconnecter</a></div>
+    <div id="div_inf_titre" class="divtitre">Insertion des nouvelles infractions <a href="logout.php"
+            class="link_right">se
+            déconnecter</a> <a href="inf_liste.php" class="link_right">retour à la liste des infractions</a></div>
 
     <form action="inf_insert.php" method="POST">
         <div class="center">
