@@ -5,6 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Edition d'une infraction</title>
     <link type="text/css" rel="stylesheet" href="../../vue/css/inf_liste.css">
+    <link type="text/css" rel="stylesheet" href="../../vue/css/login.css">
     <link type="text/css" rel="stylesheet" href="../../vue/css/inf_edit.css">
 </head>
 
@@ -47,16 +48,19 @@
                     <span><input id="edt_inf_immat" placeholder="n°immat" name="immat" size="8" type="text"
                             value="<?php echo $numImmat; ?>"></span>
                     <div>
-                        <label id="lbl_inf_detail_vehic" class="inf_commentaire"></label>
-                        <?php //NE PAS OUBLIER DE METTRE LES DETAILS DES VEHIC ET PROPRIO ?>
-                        <label id="lbl_inf_detail_proprio" class="inf_commentaire"></label>
+                        <label id="lbl_inf_detail_vehic" class="inf_commentaire flexbox">
+                            <?php echo $detailVehic; ?>
+                        </label>
+                        <label id="lbl_inf_detail_proprio" class="inf_commentaire flexbox">
+                            <?php echo $detailProprio; ?>
+                        </label>
                     </div>
                 </div>
             </div>
             <div class="inf_rubrique">
                 <div>
                     <span class="labeltitre">CONDUCTEUR</span>
-                    <label id="lbl_conduct_erreur" class="labelerreur">
+                    <label id="lbl_conduct_erreur" class="labelerreur flexbox">
                         <?php echo $error['conducteur']; ?>
                     </label>
                 </div>
@@ -64,7 +68,9 @@
                     <label for="edt_inf_permis">n°permis</label>
                     <span><input id="edt_inf_permis" placeholder="n°permis" name="numPermis" size="8" type="text"
                             value="<?php echo $numPermis; ?>"></span>
-                    <label id="lbl_inf_detail_permis" class="inf_commentaire"></label>
+                    <label id="lbl_inf_detail_permis" class="inf_commentaire">
+                        <?php echo $detailPermis; ?>
+                    </label>
                 </div>
             </div>
             <div class="inf_rubrique">

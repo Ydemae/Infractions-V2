@@ -69,11 +69,10 @@ if ($_SESSION['op'] == "v") {
     $buttons = '<input id="btn_inf_valider" value="Valider" name="Valider" type="submit"><input id="btn_inf_annuler" class="btnannuler" value="Annuler" name="Annuler" type="submit">';
     $BtnAjouterDelit = '<input id="btn_delit_ajouter" type="submit" name="AjouterDel" value="Ajouter">';
 }
-//Si des données utilisateurs ont été entrées, on prend les données utilisateur
+//Si des données utilisateurs ont été entrées, on garde les données utilisateur
 $dateInf = isset($_POST['dateInf']) ? $_POST['dateInf'] : $dateInf;
 $numImmat = isset($_POST['immat']) ? $_POST['immat'] : $numImmat;
 $numPermis = isset($_POST['numPermis']) ? $_POST['numPermis'] : $numPermis;
-
 
 //On initialise la liste des délits à supprimer et à ajouter de l'infraction si ils n'existent pas
 if (!isset($_SESSION['delsAjouter']) || !isset($_SESSION['delsSupprimer'])) {
@@ -147,6 +146,33 @@ if (isset($_POST['Valider'])) {
         header('location: inf_liste.php');
     }
 }
+
+//gestion de l'affichage du détail du véhicule et du propriétaire
+$detailProprio = "";
+$detailVehic = "";
+$detailPermis = "";
+
+if ($numPermis != "") {
+    if ($conductDAO->existe($numPermis)) {
+        $conduct = $conductDAO->getById($numPermis);
+        $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+    }
+}
+
+if ($numImmat != "") {
+    if ($vehiculeDAO->existe($numImmat)) {
+        $vehicule = $vehiculeDAO->getByImmat($numImmat);
+        $detailVehic = '<div>' . $vehicule->getMarque() . " " . $vehicule->getModele() . "</div><div>Immatriculé le :" . $vehicule->getDateImmat() . "</div>";
+        if ($vehicule->getProprio() != "") {
+            if ($conductDAO->existe($vehicule->getProprio())) {
+                $conduct = $conductDAO->getById($vehicule->getProprio());
+                $detailProprio = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . "</div>";
+            }
+        }
+    }
+}
+
+
 
 //Gestion de la liste des délits
 $listComprend = $comprendDAO->getByNumInf($num_inf);
