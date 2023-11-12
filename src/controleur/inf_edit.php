@@ -93,85 +93,47 @@ if (isset($_POST['delitValider'])) {
     }
 }
 
-//On gère la validation du formulaire
-if (isset($_POST['Valider'])) {
-    if ($_SESSION['op'] != 'a' && $_SESSION['op'] != 'e') {
-        throw new Error("Tu n'es pas censé être là");
-    }
-    $anError = false;
-    $date = isset($_POST['dateInf']) ? $_POST['dateInf'] : null;
-    $Immat = isset($_POST['immat']) ? $_POST['immat'] : null;
-    $Permis = isset($_POST['numPermis']) ? $_POST['numPermis'] : null;
 
-    //Vérifications de la validité des champs
-    if ($_SESSION['op'] == 'a') {
-        if ($date == null) {
-            $anError = true;
-            $error['date'] = "La date ne peut pas être vide";
-        } else if ($date > date('Y-m-d')) {
-            $anError = true;
-            $error['date'] = "La date ne peut pas être supérieure à la date du jour";
-        }
-    } else {
-        $date = $dateInf;
-    }
-    if ($Immat == null) {
-        $anError = true;
-        $error['immat'] = "Le numéro d'immatriculation ne peut pas être vide";
-    } else if (!$vehiculeDAO->existe($Immat)) {
-        $anError = true;
-        $error['immat'] = "Le numéro d'immatriculation n'existe pas";
-    }
-    if ($Permis == null) {
-        $anError = true;
-        $error['conducteur'] = "Le numéro de permis ne peut pas être vide";
-    } else if (!$conductDAO->existe($Permis)) {
-        $anError = true;
-        $error['conducteur'] = "Le numéro de permis n'existe pas";
-    }
+//Verification des champs et création des détails en fonction des données entrées
+$anError = false; //Flag permettant de savoir si on a une erreur qui devrait empêcher la validation du formulaire
 
-    if (!$anError) {
-        $NouvelleInfraction = new Infraction($num_inf, $date, $Immat, $Permis);
-        $infractionDAO->insert($NouvelleInfraction);
-        foreach ($_SESSION['delsSupprimer'] as $delit) {
-            $comprendDAO->delete($num_inf, $delit);
-        }
-        foreach ($_SESSION['delsAjouter'] as $delit) {
-            $comprendDAO->insert(new Comprend($num_inf, $delit));
-        }
-        unset($_SESSION['delsAjouter']); //unset des variables de session de l'édition d'infraction
-        unset($_SESSION['delsSupprimer']);
-        unset($_SESSION['op']);
-        unset($_SESSION['numInf']);
-        header('location: inf_liste.php');
-    }
-}
-
-//gestion de l'affichage du détail du véhicule et du propriétaire
 $detailProprio = "";
 $detailVehic = "";
 $detailPermis = "";
 
-if ($numPermis != "") {
-    if ($conductDAO->existe($numPermis)) {
-        $conduct = $conductDAO->getById($numPermis);
-        $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
-    }
+if ($dateInf == "") {
+    $anError = true;
+    $error['date'] = "La date ne peut pas être vide";
+} else if ($dateInf > date('Y-m-d')) {
+    $anError = true;
+    $error['date'] = "La date ne peut pas être supérieure à la date du jour";
 }
-
-if ($numImmat != "") {
-    if ($vehiculeDAO->existe($numImmat)) {
-        $vehicule = $vehiculeDAO->getByImmat($numImmat);
-        $detailVehic = '<div>' . $vehicule->getMarque() . " " . $vehicule->getModele() . "</div><div>Immatriculé le :" . $vehicule->getDateImmat() . "</div>";
-        if ($vehicule->getProprio() != "") {
-            if ($conductDAO->existe($vehicule->getProprio())) {
-                $conduct = $conductDAO->getById($vehicule->getProprio());
-                $detailProprio = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . "</div>";
-            }
+if ($numImmat == "") {
+    $anError = true;
+    $error['immat'] = "Le numéro d'immatriculation ne peut pas être vide";
+} else if (!$vehiculeDAO->existe($numImmat)) {
+    $anError = true;
+    $error['immat'] = "Le numéro d'immatriculation n'existe pas";
+} else {
+    $vehicule = $vehiculeDAO->getByImmat($numImmat);
+    $detailVehic = '<div>' . $vehicule->getMarque() . " " . $vehicule->getModele() . "</div><div>Immatriculé le :" . $vehicule->getDateImmat() . "</div>";
+    if ($vehicule->getProprio() != "") {
+        if ($conductDAO->existe($vehicule->getProprio())) {
+            $conduct = $conductDAO->getById($vehicule->getProprio());
+            $detailProprio = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . "</div>";
         }
     }
 }
-
+if ($numPermis == null) {
+    $anError = true;
+    $error['conducteur'] = "Le numéro de permis ne peut pas être vide";
+} else if (!$conductDAO->existe($numPermis)) {
+    $anError = true;
+    $error['conducteur'] = "Le numéro de permis n'existe pas";
+} else {
+    $conduct = $conductDAO->getById($numPermis);
+    $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+}
 
 
 //Gestion de la liste des délits
@@ -193,18 +155,47 @@ foreach ($_SESSION['delsAjouter'] as $numDelit) {
 //Gesion de la suppression des delits
 if (isset($_POST['SupprimerDelit'])) {
     $numDelitSuppr = $_POST['SupprimerDelit'][0];
-    if (count($listDels) > 1) {
-        if (in_array($numDelitSuppr, $_SESSION['delsAjouter'])) {
-            unset($_SESSION['delsAjouter'][array_search($numDelitSuppr, $_SESSION['delsAjouter'])]);
-            unset($listDels[array_search($numDelitSuppr, $listDels)]);
-        } else {
-            $_SESSION['delsSupprimer'][] = $_POST['SupprimerDelit'][0];
-            unset($listDels[array_search($numDelitSuppr, $listDels)]);
-        }
+    if (in_array($numDelitSuppr, $_SESSION['delsAjouter'])) {
+        unset($_SESSION['delsAjouter'][array_search($numDelitSuppr, $_SESSION['delsAjouter'])]);
+        unset($listDels[array_search($numDelitSuppr, $listDels)]);
     } else {
-        echo '<script>alert("Il est impossible de supprimer tous les délits d une infraction")</script>';
+        $_SESSION['delsSupprimer'][] = $_POST['SupprimerDelit'][0];
+        unset($listDels[array_search($numDelitSuppr, $listDels)]);
     }
 }
+
+//On gère la validation du formulaire
+if (isset($_POST['Valider'])) {
+    if ($_SESSION['op'] != 'a' && $_SESSION['op'] != 'e') {
+        echo '<script>alert("Tu n' . "'es pas autorisé à créer ou modifier une infraction" . '")</script>';
+    } else {
+        $count = count($listDels);
+        if ($count <= 0) {
+            echo '<script>alert("Erreur : Il est impossible de valider une infraction sans délit")</script>';
+            $anError = true;
+        }
+        if (!$anError) {
+            if ($_SESSION['op'] == 'a') {
+                $NouvelleInfraction = new Infraction($num_inf, $dateInf, $numImmat, $numPermis);
+                $infractionDAO->insert($NouvelleInfraction);
+            }
+            foreach ($_SESSION['delsSupprimer'] as $delit) {
+                $comprendDAO->delete($num_inf, $delit);
+            }
+            foreach ($_SESSION['delsAjouter'] as $delit) {
+                $comprendDAO->insert(new Comprend($num_inf, $delit));
+            }
+            unset($_SESSION['delsAjouter']); //unset des variables de session de l'édition d'infraction
+            unset($_SESSION['delsSupprimer']);
+            unset($_SESSION['op']);
+            unset($_SESSION['numInf']);
+            header('location: inf_liste.php');
+        }
+    }
+}
+
+
+
 
 //Gestion de l'amende totale affichée
 $totalAmende = $infractionDAO->getTotal($num_inf); // variable qu'on va echo en tant que total à payer
