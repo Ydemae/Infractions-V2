@@ -31,7 +31,7 @@
                     </label>
                 </span>
                 <span>
-                    <input type="submit" name="Insérer" id="btn_delit_ajouter" value="Insérer les infractions" />
+                    <input type="submit" name="Inserer" id="btn_delit_ajouter" value="Insérer les infractions" />
                 </span>
             </div>
         </div>

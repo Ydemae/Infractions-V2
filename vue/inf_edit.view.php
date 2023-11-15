@@ -45,7 +45,7 @@
                 <div>
 
                     <label for="edt_inf_immat">Immatriculation</label>
-                    <span><input id="edt_inf_immat" placeholder="n°immat" name="immat" size="8" type="text"
+                    <span><input <?php echo $InputImmatDisabled; ?> id="edt_inf_immat" placeholder="n°immat" name="immat" size="8" type="text"
                             value="<?php echo $numImmat; ?>"></span>
                     <div>
                         <label id="lbl_inf_detail_vehic" class="inf_commentaire flexbox">
@@ -66,7 +66,7 @@
                 </div>
                 <div>
                     <label for="edt_inf_permis">n°permis</label>
-                    <span><input id="edt_inf_permis" placeholder="n°permis" name="numPermis" size="8" type="text"
+                    <span><input <?php echo $InputNumPermisDisabled; ?> id="edt_inf_permis" placeholder="n°permis" name="numPermis" size="8" type="text"
                             value="<?php echo $numPermis; ?>"></span>
                     <label id="lbl_inf_detail_permis" class="inf_commentaire">
                         <?php echo $detailPermis; ?>

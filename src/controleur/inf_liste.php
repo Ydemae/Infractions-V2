@@ -15,13 +15,6 @@ if (!isset($_SESSION['open'])) {
     session_destroy();
     header('location: login.php');
 }
-
-if (isset($_POST['infVisu'])) {
-    $_SESSION['numInf'] = $_POST['infVisu'][0];
-    $_SESSION['op'] = 'v';
-    header('location: inf_edit.php');
-}
-
 if (isset($_POST['infEdit'])) {
     if ($_SESSION['isAdmin']) { //On vérifie que l'utilisateur est bien admin pour éviter les injections de code (comme modifier le name d'un submit)
         $_SESSION['numInf'] = $_POST['infEdit'][0];
@@ -74,7 +67,29 @@ if ($_SESSION['isAdmin']) {
     $allInfs = $InfDAO->getByNumPermis($_SESSION['numPermis']);
 }
 
-//Important ! Demander au prof si c'est mieux de mettre le if en dehors du for comme ça ou si c'est mieux de le mettre dedans
+
+//Vérification nécessitant la liste des infractions allInfs
+
+if (isset($_POST['infVisu'])) {
+    $anError = false;
+    if (!$_SESSION['isAdmin']){
+        $allNum = [];
+        foreach($allInfs as $inf){
+            $allNum[] = $inf->getNumInf();
+        }
+        if (!in_array($_POST['infVisu'][0], $allNum)){
+            echo "<script>alert('Vous ne pouvez pas visionner une infraction qui ne vous concerne pas')</script>";
+            $anError = true;
+        }
+    }
+    if (!$anError){
+        $_SESSION['numInf'] = $_POST['infVisu'][0];
+        $_SESSION['op'] = 'v';
+        header('location: inf_edit.php');
+    }
+}
+
+
 
 //Gestion de l'affichage des infractions
 if ($_SESSION['isAdmin']) {
@@ -104,6 +119,7 @@ if ($_SESSION['isAdmin']) {
         $affi .= '<td>' . $InfDAO->getTotal($allInfs[$i]->getNumInf()) . ' €</td><td></td><td></td></tr>';
     }
 }
+
 
 
 require_once "../../vue/inf_liste.view.php";

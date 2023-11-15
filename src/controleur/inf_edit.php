@@ -47,6 +47,8 @@ $inf = $infractionDAO->getByNumInf($num_inf);
 //Affichage des boutons selon l'opération effectuée (ajout, modification, visualisation) + initialisation des champs de saisie
 $buttons = "";
 $InputDateInfDisabled = '';
+$InputImmatDisabled = '';
+$InputNumPermisDisabled = '';
 $dateInf = "";
 $numImmat = "";
 $numPermis = "";
@@ -54,6 +56,8 @@ $BtnAjouterDelit = '';
 if ($_SESSION['op'] == "v") {
     $buttons = '<input id="btn_inf_retour" class="btnretour" name="retour" value="Retour" type="submit">';
     $InputDateInfDisabled = "disabled";
+    $InputImmatDisabled = "disabled";
+    $InputNumPermisDisabled = "disabled";
     $dateInf = $inf->getDateInf();
     $numImmat = $inf->getImmat();
     $numPermis = $inf->getNumPermis();

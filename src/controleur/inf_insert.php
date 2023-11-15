@@ -4,7 +4,7 @@ ini_set("display_errors", 1);
 
 session_start();
 
-require_once "./gestionFichiers.php";
+require_once "../controleur/gestionFichiers.php";
 
 if (!isset($_SESSION['open'])) {
     header('location: login.php');
