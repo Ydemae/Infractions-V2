@@ -101,13 +101,13 @@ CREATE TABLE `conducteur` (
 --
 
 INSERT INTO `conducteur` (`num_permis`, `date_permis`, `nom`, `prenom`, `mot_de_passe`, `is_admin`) VALUES
-('AZ67', '2011-02-01', 'AIRPACH', 'Fabrice', 'd2628dfa5813a08486d3203bd05ca5b5c404513bc9cccc20ec9bdd95de90142c', True),
-('AZ69', '2011-02-01', 'CAVALLI', 'Frédéric', '0cf3943cbbe4facc14d79ab0e2b64baa44c3a8bd3191de1a5dbfca8948d6c6c3', False),
-('AZ71', '2017-02-02', 'MANGONI', 'Joseph', '8fe8c13e30a864b6cf7f4b10d91ce10a3fdf58dfb311b45e97f29f0b2f1a1497', False),
-('AZ81', '1997-04-09', 'GAUDE', 'David', '6153896bc817e2259f058046ea99b80a4e0920247e3e68e578ada458213e41ff', False),
-('AZ90', '2000-05-04', 'KIEFFER', 'Claudine', '25cd1cc2f5399dd16d862cc7d25c02ee851d3102b66fa2ca0f7ecad74b377783', False),
-('AZ92', '2001-04-06', 'THEOBALD', 'Pascal', '324160b67e75f2107fde95a17620e903a86469b1bd93fac9babf72084f789747', False),
-('AZ99', '2003-09-06', 'CAMARA', 'Souleymane', '4001b2ef819af97f157a53086fca003c26a43b2d4a1ebe9f7810cec2d19559bc', False);
+('AZ67', '2011-02-01', 'AIRPACH', 'Fabrice', 'Fab-AIR67_', True),
+('AZ69', '2011-02-01', 'CAVALLI', 'Frédéric', '!CaVfred6', False),
+('AZ71', '2017-02-02', 'MANGONI', 'Joseph', 'Jojo71A', False),
+('AZ81', '1997-04-09', 'GAUDE', 'David', '01David.m3', False),
+('AZ90', '2000-05-04', 'KIEFFER', 'Claudine', 'ClaudKI9A', False),
+('AZ92', '2001-04-06', 'THEOBALD', 'Pascal', 'PasCal1boss', False),
+('AZ99', '2003-09-06', 'CAMARA', 'Souleymane', 'SouleeeeeyCAM999?', False);
 
 -- --------------------------------------------------------
 

@@ -29,7 +29,7 @@ if (isset($_POST["Connexion"])){
         if ($ConductDAO->existe($id['login'])){
             $user = $ConductDAO->getById($id['login']);
             $mdp = $user->getMdp();
-            if(trim($id['password']) == $mdp){
+            if(hash_hmac('sha256', trim($id['password']), "NitschkeMeilleurProf") == $mdp){
                 session_start();
                 $_SESSION['open'] = true;
                 $_SESSION['isAdmin'] = $user->getAdmin();
