@@ -128,12 +128,14 @@ if ($numImmat == "") {
         }
     }
 }
-if (!$conductDAO->existe($numPermis)) {
-    $anError = true;
-    $error['conducteur'] = "Le numéro de permis n'existe pas";
-} else {
-    $conduct = $conductDAO->getById($numPermis);
-    $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+if ($numPermis != NULL){
+    if (!$conductDAO->existe($numPermis)) {
+        $anError = true;
+        $error['conducteur'] = "Le numéro de permis n'existe pas";
+    } else {
+        $conduct = $conductDAO->getById($numPermis);
+        $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+    }
 }
 
 
