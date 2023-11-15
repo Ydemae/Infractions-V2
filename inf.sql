@@ -34,8 +34,8 @@ DROP TABLE IF EXISTS delit;
 --
 
 CREATE TABLE `comprend` (
-  `id_inf` varchar(5) NOT NULL,
-  `id_delit` int(3) NOT NULL
+  `id_inf` int(11) NOT NULL,
+  `id_delit` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -203,7 +203,9 @@ INSERT INTO `vehicule` (`num_immat`, `date_immat`, `modele`, `marque`, `num_perm
 -- Index pour la table `comprend`
 --
 ALTER TABLE `comprend`
-  ADD PRIMARY KEY (`id_inf`,`id_delit`);
+  ADD PRIMARY KEY (`id_inf`,`id_delit`),
+  ADD FOREIGN KEY (`id_inf`) REFERENCES infraction(`id_inf`),
+  ADD FOREIGN KEY (`id_delit`) REFERENCES delit(`id_delit`);
 
 --
 -- Index pour la table `conducteur`
@@ -224,6 +226,7 @@ ALTER TABLE `infraction`
   ADD PRIMARY KEY (`id_inf`),
   ADD FOREIGN KEY (`num_permis`) REFERENCES conducteur(`num_permis`),
   ADD FOREIGN KEY (`num_immat`) REFERENCES vehicule(`num_immat`);
+
 
 --
 -- Index pour la table `vehicule`

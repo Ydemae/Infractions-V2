@@ -14,7 +14,7 @@ class DelitDAO
 
     function insert(Delit $del): void
     {
-        $this->bd->execSQL("INSERT INTO DELIT (id_delit, nature, tarif)
+        $this->bd->execSQL("INSERT INTO delit (id_delit, nature, tarif)
                                         VALUES (:num, :nat, :tarif)"
             ,
             [
@@ -65,7 +65,7 @@ class DelitDAO
 
     function existe(string $num): bool
     {
-        $req = "SELECT *  FROM  DELIT
+        $req = "SELECT *  FROM  delit
 					  WHERE id_delit = :num";
         $res = ($this->loadQuery($this->bd->execSQL($req, [':num' => $num])));
         return ($res != []);
