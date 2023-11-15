@@ -29,7 +29,8 @@ if (!file_exists("../../fichiers/infractions_ext.json")) {
     }
 
     if (isset($_POST['Inserer'])) {
-        $errorCode = InsertInfExt($content);
+        echo str_replace("é", "e", $content);
+        $errorCode = InsertInfExt(str_replace("é", "e", $content));
         if ($errorCode == 1) {
             $fileError = "L'insertion n'a pas pu être effectuée, veuillez vérifier le format du fichier json.<br>Exemple de ligne correcte :" . '{"date_inf":"05/10/2023","num_immat":"AA643BB","num_permis": "AZ71","délits" :[1]}';
         }

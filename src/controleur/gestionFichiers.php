@@ -11,10 +11,10 @@ function InsertInfExt(string $infractionsDel): int //attend un format JSON
     $delitDAO = new DelitDAO();
     $id_inf = $infDAO->GetAutoIncrement();
     foreach ($infractionsDel as $i){ //boucle de vérification
-        if (!isset($i['date_inf']) || !isset($i['num_immat']) || !isset($i['num_permis']) || !isset($i['délits'])) {
+        if (!isset($i['date_inf']) || !isset($i['num_immat']) || !isset($i['num_permis']) || !isset($i['delits'])) {
             return 1;
         }
-        $delits = $i['délits'];
+        $delits = $i['delits'];
         foreach ($delits as $d) {
             if (!$delitDAO->existe($d)){
                 return 2;
@@ -31,7 +31,7 @@ function InsertInfExt(string $infractionsDel): int //attend un format JSON
         $inf->setImmat($i['num_immat']);
         $inf->setNumPermis($i['num_permis']);
         $infDAO->insert($inf);
-        $delits = $i['délits'];
+        $delits = $i['delits'];
         foreach ($delits as $d) {
             $comprendDAO->insert(new Comprend("$id_inf", "$d"));
         }

@@ -39,12 +39,7 @@ class InfractionDAO
         $temp = $this->bd->execSQL("SELECT `AUTO_INCREMENT`
         FROM  INFORMATION_SCHEMA.TABLES
         Where   TABLE_NAME   = 'infraction';");
-        if (isset($temp[1])){
-            $temp = $temp[1];
-        }
-        else{
-            $temp = $temp[0];
-        }
+        $temp = $temp[0];
         $temp = json_decode(json_encode($temp), TRUE);
         return (int) $temp["AUTO_INCREMENT"];
     }
