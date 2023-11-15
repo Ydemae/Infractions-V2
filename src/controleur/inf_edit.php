@@ -128,10 +128,7 @@ if ($numImmat == "") {
         }
     }
 }
-if ($numPermis == null) {
-    $anError = true;
-    $error['conducteur'] = "Le numéro de permis ne peut pas être vide";
-} else if (!$conductDAO->existe($numPermis)) {
+if (!$conductDAO->existe($numPermis)) {
     $anError = true;
     $error['conducteur'] = "Le numéro de permis n'existe pas";
 } else {
