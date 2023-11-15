@@ -10,24 +10,31 @@ function InsertInfExt(string $infractionsDel): int //attend un format JSON
     $comprendDAO = new ComprendDAO();
     $delitDAO = new DelitDAO();
     $id_inf = $infDAO->GetAutoIncrement();
-    foreach ($infractionsDel as $i) {
+    foreach ($infractionsDel as $i){ //boucle de vérification
         if (!isset($i['date_inf']) || !isset($i['num_immat']) || !isset($i['num_permis']) || !isset($i['délits'])) {
             return 1;
         }
+        $delits = $i['délits'];
+        foreach ($delits as $d) {
+            if (!$delitDAO->existe($d)){
+                return 2;
+            }
+        }
+        $id_inf++;
+    }
+    $id_inf = $infDAO->GetAutoIncrement();
+    foreach ($infractionsDel as $i) {
         $inf = new Infraction();
         $date = explode("/", $i['date_inf']);
         $ReformatDate = $date[2] . '-' . $date[1] . '-' . $date[0]; //Reformatage de la date en format sql
         $inf->setDateInf($ReformatDate);
         $inf->setImmat($i['num_immat']);
         $inf->setNumPermis($i['num_permis']);
+        $infDAO->insert($inf);
         $delits = $i['délits'];
         foreach ($delits as $d) {
-            if (!$delitDAO->existe($d)){
-                return 2;
-            }
             $comprendDAO->insert(new Comprend("$id_inf", "$d"));
         }
-        $infDAO->insert($inf);
         $id_inf++;
     }
     return 0;
