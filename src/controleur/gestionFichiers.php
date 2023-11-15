@@ -21,13 +21,13 @@ function InsertInfExt(string $infractionsDel): int //attend un format JSON
         $inf->setImmat($i['num_immat']);
         $inf->setNumPermis($i['num_permis']);
         $delits = $i['délits'];
-        $infDAO->insert($inf);
         foreach ($delits as $d) {
             if (!$delitDAO->existe($d)){
                 return 2;
             }
             $comprendDAO->insert(new Comprend("$id_inf", "$d"));
         }
+        $infDAO->insert($inf);
         $id_inf++;
     }
     return 0;
