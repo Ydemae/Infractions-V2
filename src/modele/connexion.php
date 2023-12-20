@@ -9,7 +9,7 @@ class Connexion
 
         $db_config['SGBD'] = 'mysql';
         $db_config['HOST'] = 'localhost'; //devbdd.iutmetz.univ-lorraine.fr pour l'iut
-        $db_config['DB_NAME'] = 'maloron1u_infractions_app';
+        $db_config['DB_NAME'] = 'infractions';
         $db_config['USER'] = 'root';
         $db_config['PASSWORD'] = 'root';
 

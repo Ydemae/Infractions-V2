@@ -128,13 +128,16 @@ if ($numImmat == "") {
         }
     }
 }
-if (!$conductDAO->existe($numPermis)) {
+if($numPermis != null){
+	if (!$conductDAO->existe($numPermis)) {
     $anError = true;
     $error['conducteur'] = "Le numéro de permis n'existe pas";
-} else {
-    $conduct = $conductDAO->getById($numPermis);
-    $detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+	} else {
+		$conduct = $conductDAO->getById($numPermis);
+		$detailPermis = '<div>' . $conduct->getNom() . " " . $conduct->getPrenom() . "</div><div>Permis obtenu le :" . $conduct->getDatePermis() . '</div>';
+	}
 }
+
 
 
 //Gestion de la liste des délits
@@ -179,6 +182,10 @@ if (isset($_POST['Valider'])) {
             if ($_SESSION['op'] == 'a') {
                 $NouvelleInfraction = new Infraction($num_inf, $dateInf, $numImmat, $numPermis);
                 $infractionDAO->insert($NouvelleInfraction);
+            }
+            else{
+                $infractionDAO->updatePermis($num_inf, $numPermis);
+                $infractionDAO->updateImmat($num_inf, $numImmat);
             }
             foreach ($_SESSION['delsSupprimer'] as $delit) {
                 $comprendDAO->delete($num_inf, $delit);

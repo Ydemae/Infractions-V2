@@ -79,6 +79,33 @@ class InfractionDAO
         return $somme;
     }
 
+    function updateImmat(string $num, string $immat) : int{
+        if(!$this->existe($num)){
+            return 1;
+        }
+        require_once "vehiculeDAO.class.php";
+        $vehiculeDAO = new VehiculeDAO();
+        if (!$vehiculeDAO->existe($immat)){
+            return 1;
+        }
+        $req = "UPDATE infraction SET num_immat = :immat WHERE id_inf = :id";
+        $this->bd->execSQL($req, [':immat' => $immat, ":id" => $num]);
+        return 0;
+    }
+    function updatePermis(string $num, string $numPermis) : int{
+        if(!$this->existe($num)){
+            return 1;
+        }
+        require_once "conducteurDAO.class.php";
+        $conducteurDAO = new ConducteurDAO();
+        if (!$conducteurDAO->existe($numPermis)){
+            return 1;
+        }
+        $req = "UPDATE infraction SET num_permis = :permis WHERE id_inf = :id";
+        $this->bd->execSQL($req, [':permis' => $numPermis, ":id" => $num]);
+        return 0;
+    }
+
     function getByNumInf(string $num_inf): Infraction
     {
         $uneInf = new Infraction();
